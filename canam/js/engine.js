@@ -5,29 +5,6 @@
 var tentative = 0;
 var nouveuMessage;
 
-//function ListeDesMarchands(){
-//$.ajax({
-//  dataType: "json",
-//  url: "https://s3-eu-west-1.amazonaws.com/virtualcard/marchand.json",
-////  data: data,
-//  success: function(data) {
-//$('#Restauration').empty();
-//            $('#Restauration').append(data[0].restauration);
-//            
-//            $('#Service').empty();
-//            $('#Service').append(data[0].Service);
-//                
-//            $('#Mobilier').empty();
-//            $('#Mobilier').append(data[0].Mobilier);
-//                
-//            $('#provinciaux').empty();
-//            $('#provinciaux').append(data[0].provinciaux);
-//
-//             console.log(data[0]);  }
-//});
-
-//};
-
 //============================================================
 //    background-color: rgb(33, 129, 202); pour le logo virka
 //    font-family: "Avenir W01", Arial, sans-serif;
@@ -42,12 +19,11 @@ if(localStorage.boolrestauration  == "false"){
     document.getElementById("mobilier").style.display="none";
 }
 else{
-          $.get("/www/merchant.html", function(data){
+          $.get("/canam/merchant.html", function(data){
              $('#merchantPage').append(data);
          });
 };
 
-//    $.getJSON("https://s3-eu-west-1.amazonaws.com/virtualcard/restauration.json",function(data,status){
 
 //    *************************************************************
 //    ************************ Restauration ************************
@@ -55,12 +31,8 @@ else{
     if(localStorage.boolrestauration  == "false"){
         document.getElementById("restauration").style.display="none";
         }
-//$('#MyListView').listview().listview('refresh');
     else{
         $.getJSON("https://s3-eu-west-1.amazonaws.com/virtualcard/restauration.json",function(data,status){    
-                // $('#restaurationDIV').empty();
-                // $('#restaurationDIV').append(data[0].restauration);
-                // $('#restaurationDIV').listview('refresh'); /* to refresh the div */
         });
     };
 //    *************************************************************
@@ -91,18 +63,8 @@ else{
     }
     else{
               $.get("/www/restauration.html", function(data){
-                // $(mobilierDIV).children("div:first").html(data);
                  $('#mobilierDIV').append(data);
              });
-        
-       /* $.getJSON("https://s3-eu-west-1.amazonaws.com/virtualcard/restauration.json",function(data,status){
-                $('#mobilierDIV').empty();
-            /*var element = document.getElementById('mobilierDIV');
-            element.insertAdjacentHTML('afterbegin', '/www/restauration.html');
-
-                $('#mobilierDIV').append(/www/restauration.html);
-                $('#mobilierDIV').listview('refresh');
-        });*/
     };
 //    *************************************************************
 
@@ -127,7 +89,6 @@ else{
 //    *************************************************************
     if(localStorage.boolautre  == "false"){
         document.getElementById("autre").style.display="none";
-//        $('#autre').style.display="none";
     }
     else{
         $.getJSON(localStorage.autre,function(data,status){
@@ -143,7 +104,6 @@ else{
 //    *************************************************************
     if(localStorage.booloffers == "false"){
         document.getElementById("OffresSpeciale").style.display="none";
-//        $('#OffresSpeciale').style.display="none";
     }
 
 //    *************************************************************
