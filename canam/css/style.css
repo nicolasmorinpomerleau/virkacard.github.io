@@ -1,0 +1,367 @@
+
+.header{
+background-color: #039be5 !important;
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+.bkg-Orange{
+  background-color: #f6f6f6 !important;
+  color: black !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 500 !important;
+}
+.ListMarchand{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 500 !important;
+}
+
+h2 {
+  width: 100%;
+  text-align:left;
+  padding-top: 2%;
+  font-family: "Century Gothic",sans-serif;
+  color:#0066c0;
+}
+h3, h4{
+  font-family: "Century Gothic",sans-serif;
+}
+
+Hide{
+  display:none;
+}
+
+p{
+  width: 100%;
+  text-align:center;
+  color: darkorange;
+}
+.Carte{
+  height: 43vw;
+}
+.listeMarchands{
+  background-color: #cccccc;
+  background-image: linear-gradient(#f2f2f2, #ffe9e1);
+  position: relative;
+  min-height: 200px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+
+
+#Numero{
+  font-size: 3vw;
+  position: relative;
+  float: left;
+  font-family: "Century Gothic",sans-serif;
+  color: #039be5;;
+}
+
+#name{
+  text-align: left;    
+  font-size: 4vw;
+  position: relative;
+  float: left;
+  font-family: "Century Gothic",sans-serif
+}
+
+#compagny{
+  text-align: left;
+  font-size: 4vw;
+  position: relative;
+  float: left;
+  font-family: "Century Gothic",sans-serif;
+  color: gray
+}
+
+.second{
+  padding: 0.2em 5em 1em 5em;
+  background-repeat:repeat-y;
+  background-position:center center;
+  background-attachment:scroll;
+  background-size:100% 100%;
+}
+
+.ui-page { 
+  background:#ffffff;
+}
+
+.grid{
+  border: solid;
+  display: grid;
+  grid-template-rows: 12% 23% 32% 25% 14%;
+  padding: 0.5em;
+  grid-row-gap: 2px;
+  box-shadow: 0 10px 12px -6px black;
+  border-width:thin;
+  background-color: #a9a3a824;
+}
+
+.grid2{
+  display: grid;
+  grid-template-rows: 50% 50%;
+  padding: 1em 0em 1.5em 1em;
+  grid-row-gap: 0.5vw;
+}
+
+.MyGrid{
+  display: grid;
+  grid-template-columns: 10% 90%;
+  padding: 0.5em;
+  grid-column-gap: 5px;
+}
+@media screen and (max-width: 480px){
+  .grid2{
+  grid-row-gap: 2vw;
+  }
+}
+  @media screen and (orientation:portrait) {
+  .Collabs{
+  margin-left: 1em!important;
+  margin-right: 1em!important;
+  }
+} 
+
+@media screen and (orientation:landscape) {
+ .Collabs{
+  margin-left: 2em!important;
+  margin-right: 2em!important;
+  }
+}
+
+td{
+  text-align:left;
+}
+@media screen and (orientation:portrait) {
+ .grid{
+    border: solid;
+    display: grid;
+    grid-template-rows: 12% 17% 30% 27% 13%;
+    padding: 0.5em;
+    grid-row-gap: 1px;
+    box-shadow: 0 10px 12px -6px black;
+    border-width:thin;
+    background-color: #a9a3a824;
+}
+ #barcode{
+    width: 50%;
+    margin-top: -10px;
+ }
+ .Carte{
+   height: 52vw;
+}
+ #titreCarte{
+   font-size: 20px !important;
+ }
+}
+a {
+  background-color: #ffffff!important;
+  /*color: #84878a!important;*/
+  border: 0;         
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+  font-family: Google Sans, sans-serif!important;
+  font-size: 2 rem;
+  line-height: 1.5;
+  
+  color: #696c6f!important;
+ /* font-family: Google, sans-serif !important;
+  font-size: medium!important;*/
+}
+.ui-page-theme-b .ui-btn, html .ui-bar-b .ui-btn, html .ui-body-b .ui-btn, 
+html body .ui-group-theme-b .ui-btn, html head+body .ui-btn.ui-btn-b, 
+.ui-page-theme-b .ui-btn:visited, html .ui-bar-b .ui-btn:visited, 
+html .ui-body-b .ui-btn:visited, html body .ui-group-theme-b .ui-btn:visited, 
+html head+body .ui-btn.ui-btn-b:visited{
+   text-shadow: none!important;
+   border-color: #ffffff!important;
+   font-size: x-large;
+} 
+
+.ui-collapsible-inset.ui-collapsible-themed-content .ui-collapsible-content {
+   border-left-width: 0px!important;
+   border-right-width: 0px!important;
+}
+
+#imgResto{
+  width:7%;
+  height:7%;
+  margin-right:5px;
+}
+
+@media screen and (orientation:portrait){
+  #imgResto{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+
+#imgCare{
+  width:7%;
+  height:7%;
+  margin-right:5px;
+}
+@media screen and (orientation:portrait){
+  #imgCare{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+#imgMecanic{
+  width:10%;
+  height:10%;
+  margin-right:5px;
+}
+@media screen and (orientation:portrait){
+  #imgMecanic{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+#imgRose{
+  width:10%;
+  height:10%;
+  margin-right:5px;
+}
+
+@media screen and (orientation:portrait){
+  #imgRose{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+
+#imgAll{
+  width:8%;
+  height:8%;
+  margin-right:5px;
+}
+
+@media screen and (orientation:portrait){
+  #imgAll{
+    width:12%;
+    height:12%;
+    margin-right:5px;
+  }
+}
+
+#imgCloth{
+  width:10%;
+  height:10%;
+  margin-right:5px;
+}
+@media screen and (orientation:portrait){
+  #imgCloth{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+#imgFlash{
+  width:10%;
+  height:10%;
+  margin-right:5px;
+}
+@media screen and (orientation:portrait){
+  #imgFlash{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+#imgBed{
+  width:10%;
+  height:10%;
+  margin-right:5px;
+}
+@media screen and (orientation:portrait){
+  #imgBed{
+    width:15%;
+    height:15%;
+    margin-right:5px;
+  }
+}
+#parallelogram {
+  width: 150px;
+  height: 100px;
+  transform: skew(20deg);
+  background:#C45500;
+}
+
+#shape{
+  border-right: 14px solid transparent;
+  border-top: 34px solid #C45500;
+  float: left;
+}
+@media screen and (orientation:portrait){
+  #shape {
+    border-right: 14px solid transparent;
+    border-top: 22px solid #C45500;
+    float: left;
+  }
+}
+
+@media screen and (min-width:750px){
+  #shape {
+    border-top: 34px solid #C45500;
+  }
+}
+
+@media screen and (min-width:800px){
+  #shape {
+    border-top: 43px solid #C45500;
+  }
+}
+@media screen and (min-width:900px){
+  #shape {
+    border-top: 48px solid #C45500;
+  }
+}
+@media screen and (max-width:600px){
+  #shape {
+    border-top: 31px solid #C45500;
+  }
+}
+@media screen and (max-width:540px){
+  #shape {
+    border-top: 29px solid #C45500;
+  }
+}
+@media screen and (max-width:500px){
+  #shape {
+    border-top: 26px solid #C45500;
+  }
+}
+@media screen and (max-width:400px){
+  #shape {
+    border-top: 20px solid #C45500;
+  }
+}
+@media screen and (max-width:380px){
+  #shape {
+    border-top: 18px solid #C45500;
+  }
+}
+@media screen and (max-width:310px){
+  #shape {
+    border-top: 16px solid #C45500;
+  }
+}
+#oct{
+  font-size: 4vw;
+  color: #FFF;
+  font-weight: 700;
+  background: #C45500;
+  height: 13%;
+  max-width: 90%;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0 5px;
+  float: left;
+}
