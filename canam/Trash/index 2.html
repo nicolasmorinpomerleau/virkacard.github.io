@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Jquery Demo Abou</title>
+    
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+</head>
+<body>
+<!--
+    ****************************
+             page 1
+    ****************************
+-->
+<div data-role="page" id="page1">
+    <div data-role="header" data-theme="a">
+        <h1> Titre de mon App</h1>
+    </div> <!-- header -->
+    <div data-role="content">
+        <form >
+          Email: <input type="text" id="email" name="email"><br>
+          Code: <input type="text" id="code" name="code"><br>
+            <button onclick="Validate()">Envoyer</button>
+<!--          <input type="submit" value="Submit" onclick="Validate()">-->
+        </form>
+        
+    <script>
+        var ContactList;
+        var find = false;
+        var Contact = {
+            name : '',
+            compagny : ''
+        }
+    function makeApiCall() {
+      var params = {
+        // The ID of the spreadsheet to retrieve data from.
+        spreadsheetId: '1aY4VBrb_J2f_vtNX9E14yrB6eEDblqYsiURtIdCNekI',  // TODO: Update placeholder value.
+
+        // The A1 notation of the values to retrieve.
+        range: 'Sheet1',  // TODO: Update placeholder value.
+
+        // How values should be represented in the output.
+        // The default render option is ValueRenderOption.FORMATTED_VALUE.
+//        valueRenderOption: '',  // TODO: Update placeholder value.
+
+        // How dates, times, and durations should be represented in the output.
+        // This is ignored if value_render_option is
+        // FORMATTED_VALUE.
+        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+//        dateTimeRenderOption: '',  // TODO: Update placeholder value.
+      };
+
+      var request = gapi.client.sheets.spreadsheets.values.get(params);
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        ContactList = response.result.values;
+          console.log(response.result);
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
+
+    function initClient() {
+      var API_KEY = 'AIzaSyBORppgBx8YSqcR-xx09atWCnKDWWVKyns';  // TODO: Update placeholder with desired API key.
+
+      var CLIENT_ID = '886748529811-dimrr7ack0uma6f146oipg8hlnv1e0on.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+
+      // TODO: Authorize using one of the following scopes:
+      //   'https://www.googleapis.com/auth/drive'
+      //   'https://www.googleapis.com/auth/drive.file'
+      //   'https://www.googleapis.com/auth/drive.readonly'
+      //   'https://www.googleapis.com/auth/spreadsheets'
+      //   'https://www.googleapis.com/auth/spreadsheets.readonly'
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+      gapi.client.init({
+        'apiKey': API_KEY,
+        'clientId': CLIENT_ID,
+        'scope': SCOPE,
+        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      }).then(function() {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+          updateSignInStatus();
+//        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      });
+    }
+
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+
+    function updateSignInStatus() {
+//      if (isSignedIn) {
+        makeApiCall();
+//      }
+    }
+
+    function handleSignInClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+
+    function handleSignOutClick(event) {
+      gapi.auth2.getAuthInstance().signOut();
+    }
+        
+    function Validate(){
+        var email = document.getElementById('email').value;
+        var code  = document.getElementById('code').value;
+//        console.log(code,email);
+//        makeApiCall();
+        
+//        ContactList.forEach(function(item, index){
+//            index = index +1;   
+//            if (email == item[0] && code == item[1]){
+////                window.location ='page2';
+////                $.mobile.changePage("#page2");
+//                window.location.href = "#page2";
+//                find=true;
+//                return;
+//            }
+//            if(find){
+//                return;
+//            }
+//            });
+        
+//        For loop
+//        $.get("/node.js", function(email,code){
+////        traintemnt
+//        });
+        
+            for(i=0;i<ContactList.length;i++){
+            if (email == ContactList[i][2] && code == ContactList[i][3]){
+                Contact.name = ContactList[i][0];
+                Contact.compagny=ContactList[i][1];
+                nameID = document.getElementById("name");
+                nameID.innerHTML = Contact.name;
+                compagnyID = document.getElementById("compagny");
+                compagnyID.innerHTML = Contact.compagny;
+                window.location.href = "#page2";
+                break;
+            }
+                if(i==ContactList.length-1){
+                window.location.href = "#page3";
+                }
+            };
+        
+    }
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+        
+        <p> Content</p>
+    </div> <!-- Content -->
+    
+<!--
+    <div data-role="footer" data-theme="e" data-position="fixed" data-id="foot">
+        <div data-role="navbar" >
+            <ul>
+                <li><a class="ui-btn-active ui-state-persist" href="#page1" data-role="buton" data-icon="star"> Page1</a></li>
+                <li><a href="#page2" data-role="buton" data-icon="grid"> Page2</a></li> 
+                <li><a href="#page3" data-role="buton"> Popup</a></li> 
+            </ul>
+        </div>
+    </div> 
+-->
+</div><!-- /Page 1 -->
+
+<!--
+    ****************************
+             page 2
+    ****************************
+-->
+<div data-role="page" id="page2">
+    <div data-role="header" data-theme="a">
+        <h1> </h1>
+<!--        <a data-rel="back" data-icon="back"> Back</a>-->
+        <a data-rel="forward" data-icon="forward"> liste de marchands</a>
+    </div> <!-- header -->
+    
+    <div data-role="content">
+        <div class="Carte"> 
+            <h2> Carte de membre </h2> <br>
+            <div class="card mainGrid">
+              <img class="rotate" src="img/logo.png" alt="Avatar" style="width:100%;padding-top: 5%;">
+              <div class="container">
+                  <div id="TextContact"> 
+                  <label class="rotate forName" for="text-16" id="name"><h1></h1></label> 
+                  <h4 class="rotate"><label  for="text-12" id="compagny"></label></h4> 
+                  <div style="display: inline;"> 
+                      <h4 style="color: darkgray;     float: right;
+    padding-right: 10%;"> Date d'expiration:<label for="text-12" id="expireDate"> 31 août 2029 </label></h4>
+                  </div>
+                  </div>
+                </div>
+            </div>
+<!--            <p> Powered by mangoo</p>-->
+        </div>
+    </div> <!-- Content -->
+</div> <!-- /Page2 -->
+ 
+<!--
+    ****************************
+             page 3
+    ****************************
+-->
+<div data-role="page" id="page3">
+    <div data-role="header" data-theme="a">  
+        <h1> Page 3</h1>
+        <a data-rel="back" data-icon="back"> Back</a>    </div> <!-- header -->
+    <div data-role="content">
+ <p> WTF, votre carte n'est pas disponible.
+     Veuillez contacter l'administration de la chambre de commerce pour plus d'information</p>    
+    </div> <!-- Content -->
+</div><!-- /Page 3 -->
+
+<!--
+    ****************************
+             page 4
+    ****************************
+-->
+<div data-role="page" id="page4">
+    <div data-role="header" data-theme="a">  
+    </div> <!-- header -->
+    <div data-role="content">
+            <a data-rel="back" data-icon="back"> Back</a>
+        <iframe class="highcharts-iframe" src="https://cloud.highcharts.com/embed/rksMCihz7/" style="border: 0; width: 100%; height: 500px"></iframe>    
+    </div> <!-- Content -->
+</div><!-- /Page 4 -->
+</body>
+</html>

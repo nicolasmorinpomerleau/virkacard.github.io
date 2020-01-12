@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** "> -->
+
+    <title>Carte de membre virtuelle</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css"/>
+    <link rel="stylesheet" href="css/color.css" />
+    <!-- <link rel="stylesheet" href="css/google.css" > 
+    <link rel="stylesheet" href="css/free-v4-shims.min.css" > -->
+
+    <!-- <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.12.0/css/svg-with-js.css" rel="stylesheet" /> -->
+  
+    <!-- <script src="js/b72fd8903d.js"></script>
+    <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="manifest" href="/www/manifest.json">
+    
+<!--            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>-->
+<!--    Not to include for the current version 27 dec 2018-->
+<!--    <script type="text/javascript" src="cordova.js"></script>-->
+    
+<!--    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>-->
+<!--
+    <script>
+         var OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "8388c0ef-1492-4892-9296-17091773564c",
+            });
+          });
+   </script>
+-->
+<!-- <script src="js/OneSignalSDK-2.js"></script>
+<script src="js/OneSignal.js"></script> -->
+<script src="js/engine.js"></script>
+<script src="js/JsBarcode.all.min.js"></script></head>
+<body>
+<!--
+    ****************************
+             pageouverture
+    ****************************
+-->
+<div data-role="page" id="pageouverture">
+    <div role="main" data-role="content">
+          <h1 style="text-align: center; margin-top: 20%; color: #29435f">Ouverture de votre carte..</h1>
+    </div> 
+</div>
+    
+<!--
+    ****************************
+             page 1
+    ****************************
+-->
+<div data-role="page" id="page1">
+    <div data-role="header" class="header" data-theme="a">
+        <h1> Identification de la carte de membre</h1>
+    </div> <!-- header -->
+    <div role="main" data-role="content">
+        <form >
+          <label id="MonMessage" ><h4>Veuillez entrer votre courriel et votre code:</h4></label> 
+          Courriel: <input type="text" id="email" name="email"><br>
+          Code: <input type="text" id="code" name="code"><br>
+            <button onclick="Validate()">Envoyer</button>
+        </form>
+    </div> <!-- Content -->
+</div><!-- /Page 1 -->
+
+<!--
+    ****************************
+             page 2
+    ****************************
+-->
+<div data-role="page" id="page2">
+    <div data-role="header" class="header" style="overflow:hidden; background-color: #333; color: white;" data-id="persistent" data-position="fixed">
+            <h1> </h1>
+        <a data-id='persistent' href="#page3" class="bkg-Orange"  id="ListeDesMarchands" data-transition="slide" > Liste des marchands </a>
+        <a data-id="persistent" id="events" href="#page4" class="bkg-Orange" data-transition="slide"> Événements</a>
+    </div><!-- /header -->
+    <button onclick="clear1()">Clear</button>
+  
+     <div role="main" class="ui-content second">
+        <div class="Carte grid">
+            <!-- 1 -->
+        <div style=" font-size: 28px;
+                    text-align: center;
+                    color: white;
+                    font-family: Google Sans, sans-serif;
+                    background-color: #FFC107;" id="titreCarte">
+             Carte Privilèges du membre
+            </div>
+            <!-- 2 -->
+            <div>
+               <label id="organisation" style="padding-bottom:30px; text-align:center; font-size: 7vw;color: #039be5;" ><h4 style="margin:0!important;">Groupe Canam</h4></label><br>
+            </div>
+            <!-- 3 -->
+            <div>
+                <label id="Numero" style="margin:0; lcolor: #039be5;">Numéro</label><br> <br/>
+                <label id="name" style="color: #039be5;"><h5 style="margin:0!important; text-align:left">Aboubakr mekhatria</h5></label>
+            </div>
+             <!-- 4 -->
+            <div style="text-align: center;" id="CodeBare">                         
+                <svg id="barcode"></svg>
+            <script>
+            JsBarcode("#barcode", localStorage.codeBar,{ 
+              height: 50,
+              fontSize: 0,
+              background: "#f9f9f9"
+            });
+            </script>
+             </div>
+            <!-- 5 -->
+            <div style="text-align: right;color: #039be5;">
+            Date d'expiration: Septembre 2020
+            </div>
+        </div>
+    </div> <!-- Content -->
+</div> <!-- /Page2 -->
+<!--
+    ****************************
+             page 3
+    ****************************
+-->
+<div data-role="page" id="page3" style="background-color:#eaeded;!important"> 
+<div data-role="header" class="header" style="overflow:hidden; background-color: #333; color: white;" data-id="persistent" data-position="fixed">
+    <h1 style="font-weight: 500; font-size: 1.1em;">Liste des marchands</h1>
+    <a data-id="persistent" href="#page2" class="bkg-Orange" data-transition="slide"> Carte</a>
+    <a data-id="persistent" id="OffresSpeciale" class="bkg-Orange" onclick="offres()"> Offres spéciales</a>
+</div><!-- /header -->
+ 
+<div data-role="collapsibleset" data-theme="b" data-content-theme="e">
+<!-- **************************************************** -->
+<!-- **************************************************** -->
+<!-- <i class="fas fa-utensils"></i>
+ 
+<i class="fa fa-futboll-0"></i>    -->
+<p style="font-family:Google Sans, sans-serif!important; color: #0073b1;font-size: x-large;"> Toujours présenter votre carte avant de placer votre commande</p>
+  <div class="Collabs" data-role="collapsibleset" data-theme="b" data-content-theme="e" >
+  <!--    *************** Restauration page ***************-->
+  <!--    *************************************************-->
+  <!--    <div id="status-message" data-role="collapsible">-->
+
+    <!-- **************************** -->
+    <!-- **************************** -->
+    <!-- à mettre pour la version de prod  -->
+    <!-- <div id="merchantPage"></div> -->
+    <!-- **************************** -->
+
+    <div style="margin-bottom:7px;"> 
+      <div   data-role="collapsible" style="background-color:#ffffff!important;">
+              <h1  style="display: inline!important"><img id="imgResto" src="img/restaurant.png" />  Restauration </h1> 
+              <div id="restaurationDIV">
+                  <div>
+                  <a
+                  href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center;" 
+                              style="color: #bfa050;"></a>
+<!-- See how to remove the underlining -->
+                              <h2>
+                                 La Cage Aux Sports.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3>
+                                    <span id="oct">10%</span>
+                                    <span id="shape"></span> <br> vous sera accordé 
+                              (sauf sur les promotions)
+                            </h3>
+                            <h4>
+                             455, 90e rue, Saint-Georges<br>
+                              <a href="tel:418 227-8181" style="color:#0066c0!important;">418 227-8181</a>
+                            </h4>
+                          </div>  
+                          <hr>
+                          
+                          <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                     McDonald’s Saint-Georges.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3>
+                                        <span id="oct">10%</span>
+                                        <span id="shape"></span> <br>sur item à prix régulier dans 
+                                  les trois restaurants de Saint-Georges seulement.
+                                </h3>
+                            </div>  
+                            <hr>
+                              <div>
+                                    <a
+                                      href=""
+                                      target="_blank"
+                                      style="color:#bfa050;" 
+                                      align="center" 
+                                      style="color: #bfa050"></a>
+                                      <h2>
+                                     Thaïzone Saint-Georges.
+                                      </h2>
+                                    <i class="fas fa-utensils"></i>
+                                    <i class="fa fa-futboll-0"></i> 
+                                    <h3>
+                                            <span id="oct">10%</span>
+                                            <span id="shape"></span> <br>de rabais sur tous achats 
+                                      de nourriture et breuvages.
+                                    </h3>
+                                    <h4>
+                                        10125, boul. Lacroix, Saint-Georges<br>
+                                      <a href="tel: 418 227-9663" style="color:#0066c0!important;">418 227-9663</a>
+                                    </h4>
+                                </div> 
+                                  <hr> 
+                                  <div>
+                                        <a
+                                          href=""
+                                          target="_blank"
+                                          style="color:#bfa050;" 
+                                          align="center" 
+                                          style="color: #bfa050"></a>
+                                          <h2>
+                                                VG Café.
+                                          </h2>
+                                        <i class="fas fa-utensils"></i>
+                                        <i class="fa fa-futboll-0"></i> 
+                                        <h3>
+                                                <span id="oct">10%</span>
+                                                <span id="shape"></span> <br>de rabais sur tous achats de nourriture et breuvages.
+                                        </h3>
+                                        <h4>
+                                        11780, 1re Avenue, suite 201, Saint-Georges (2e étage)<br>
+                                          <a href="tel:581 722-0233" style="color:#0066c0!important;">581 722-0233</a>
+                                        </h4>
+                                    </div> 
+                                    <hr>
+                                    <div>
+                                            <a
+                                              href=""
+                                              target="_blank"
+                                              style="color:#bfa050;" 
+                                              align="center" 
+                                              style="color: #bfa050"></a>
+                                              <h2>
+                                                Jack Saloon St-Georges de Beauce.
+                                              </h2>
+                                            <i class="fas fa-utensils"></i>
+                                            <i class="fa fa-futboll-0"></i> 
+                                            <h3>
+                                                    <span id="oct">15%</span>
+                                                    <span id="shape"></span> <br>de rabais du lundi au vendredi sur les menus midi.
+                                            </h3>
+                                            <h4>
+                                            11638 1ᴱ Avenue, Saint-Georges, QC G5Y 2C8<br>
+                                              <a href="tel:418-230-4114" style="color:#0066c0!important;">418-230-4114</a>
+                                            </h4>
+                                        </div> 
+            </div>
+      </div>
+    </div> 
+  <!--    ***************   Bien être page    ***************-->
+  <!--    *************************************************-->
+    <div  id="service" style="margin-bottom:7px;">
+      <div data-role="collapsible" style="background-color:#ffffff!important; color:#373737!important">
+              <h1> <img id="imgCare" src="img/care.png" /> Bien être </h1>
+              <div id="serviceDIV"> 
+                    <div>
+                          <a
+                            href=""
+                            target="_blank"
+                            style="color:#bfa050;" 
+                            align="center" 
+                            style="color: #bfa050"></a>
+                            <h2>
+                            Clinique Visuelle du Carrefour Inc.
+                            </h2>
+                          <i class="fas fa-utensils"></i>
+                          <i class="fa fa-futboll-0"></i> 
+                          <h3>
+                                <span id="oct">15%</span>
+                                <span id="shape"></span> <br>vous sera accordé(montures et verres) sauf sur les verres de contact, 
+                            ne s’applique pas sur les promotions.
+                          </h3>
+                          <h4>
+                                8585, boul. Lacroix, Saint-Georges<br>
+                            <a href="tel:  418 228-7350" style="color:#0066c0!important;"> 418 228-7350</a>
+                          </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                    Clinique d’optométrie.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3>
+                                        <span id="oct">15%</span>
+                                        <span id="shape"></span> <br> vous sera accordé(montures et verres) sauf sur les verres de contact.
+                                </h3>
+                                <h4>
+                                12650, 1re Avenue, Saint-Georges (Dr Isabelle Quirion)<br>
+                                  <a href="tel:418 228-4699" style="color:#0066c0!important;"> 418 228-4699</a>
+                                </h4>
+                        </div> 
+                              <hr>
+                              <div>
+                                    <a
+                                      href=""
+                                      target="_blank"
+                                      style="color:#bfa050;" 
+                                      align="center" 
+                                      style="color: #bfa050"></a>
+                                      <h2>
+                                        Esthétique Cliona.
+                                      </h2>
+                                    <i class="fas fa-utensils"></i>
+                                    <i class="fa fa-futboll-0"></i> 
+                                    <h3>
+                                            <span id="oct">15%</span>
+                                            <span id="shape"></span> <br> sur tout à prix régulier, Microdermabrasion, épilation laser, épilation électrolyse, traitements du visage, pose d’ongles, manucure et pédicure au gel permanent et plus encore.
+                                    </h3>
+                                    <h4>
+                                     17090, boul. Lacroix, Saint-Georges, Marjorie Vachon, prop<br>
+                                      <a href="tel:418 221-0021" style="color:#0066c0!important;"> 418 221-0021</a><br>
+                                      <a href="tel:418 221-1929" style="color:#0066c0!important;"> 418 221-1929</a><br>
+                                      <a href="mailto:esthetiquecliona@outlook.com" style="color:#0066c0!important;"> esthetiquecliona@outlook.com</a>
+                                      
+                                    </h4>
+                                  </div> 
+                                  <hr>
+                                  <div>
+                                        <a
+                                          href=""
+                                          target="_blank"
+                                          style="color:#bfa050;" 
+                                          align="center" 
+                                          style="color: #bfa050"></a>
+                                          <h2>
+                                            Fred Poulin (Orthothérapeute, Kinésithérapeute, massothérapeute).
+                                          </h2>
+                                        <i class="fas fa-utensils"></i>
+                                        <i class="fa fa-futboll-0"></i> 
+                                        <h3>
+                                                <span id="oct">10%</span>
+                                                <span id="shape"></span> <br>sera accordé pour les employés.
+                                        </h3>
+                                        <h4>
+                                            335 15e rue, Saint-Georges<br>
+                                          <a href="tel:418-226-8441" style="color:#0066c0!important;"> 418-226-8441</a>
+                                        </h4>
+                                      </div> 
+                                      <hr>
+                                      <div>
+                                            <a
+                                              href=""
+                                              target="_blank"
+                                              style="color:#bfa050;" 
+                                              align="center" 
+                                              style="color: #bfa050"></a>
+                                              <h2>
+                                                Sport Excellence Carrefour Lac Mégantic.
+                                              </h2>
+                                            <i class="fas fa-utensils"></i>
+                                            <i class="fa fa-futboll-0"></i> 
+                                            <h3>
+                                                    <span id="oct">10%</span>
+                                                    <span id="shape"></span> <br> de rabais sur toute marchandise à prix régulier.
+                                            </h3>
+                                            <h4>
+                                            12650, 1re Avenue, Saint-Georges (Dr Isabelle Quirion)<br>
+                                              <a href="tel:819 583-2518" style="color:#0066c0!important;"> 819 583-2518</a>
+                                            </h4>
+                                    </div> 
+                                          <hr>
+                                          <div>
+                                                <a
+                                                  href=""
+                                                  target="_blank"
+                                                  style="color:#bfa050;" 
+                                                  align="center" 
+                                                  style="color: #bfa050"></a>
+                                                  <h2>
+                                                    Institut de Beauté chez Geneviève.
+                                                  </h2>
+                                                <i class="fas fa-utensils"></i>
+                                                <i class="fa fa-futboll-0"></i> 
+                                                <h3>
+                                                        <span id="oct">10%</span>
+                                                        <span id="shape"></span> <br> de rabais sur les produits.
+                                                </h3>
+                                                <h4>
+                                                231, rue de l’Église, Saint-Gédéon<br>
+                                                  <a href="tel:418 582-3259" style="color:#0066c0!important;"> 418 582-3259</a>
+                                                </h4>
+                                        </div> 
+                                              <hr>
+                                              <div>
+                                                    <a
+                                                      href=""
+                                                      target="_blank"
+                                                      style="color:#bfa050;" 
+                                                      align="center" 
+                                                      style="color: #bfa050"></a>
+                                                      <h2>
+                                                        New Look Saint-Georges.
+                                                      </h2>
+                                                    <i class="fas fa-utensils"></i>
+                                                    <i class="fa fa-futboll-0"></i> 
+                                                    <h3>
+                                                      <span id="oct">15%</span>
+                                                      <span id="shape"></span> <br>
+                                                      de rabais à l’achat de lunettes ophtalmiques à prix régulier. <br>
+                                                     <span id="oct">25%</span>
+                                                      <span id="shape"></span> <br>à l’achat d’une secondaire paire de lunette pour la même personne.
+                                                    </h3>
+                                                    <h4>
+                                                    * À l’exception des services d’optométrie<br>
+                                                    </h4>
+                                            </div> 
+                                                  <hr>
+                                                  <div>
+                                                        <a
+                                                          href=""
+                                                          target="_blank"
+                                                          style="color:#bfa050;" 
+                                                          align="center" 
+                                                          style="color: #bfa050"></a>
+                                                          <h2>
+                                                            Salon Barbier KRWN Saint-Georges.
+                                                          </h2>
+                                                        <i class="fas fa-utensils"></i>
+                                                        <i class="fa fa-futboll-0"></i> 
+                                                        <h3>
+                                                          <span id="oct">15%</span>
+                                                          <span id="shape"></span> <br>
+                                                          sur tous les services offerts 
+                                                          (coupe de cheveux et/ou trime de barge).
+                                                        </h3>
+                                                        <h4>
+                                                        11730, 1re Avenue, Saint-Georges<br>
+                                                          <a href="tel:418 228-5796" style="color:#0066c0!important;"> 418 228-5796</a>
+                                                        </h4>
+                                                </div> 
+              </div>
+      </div>
+    </div> 
+  <!--    ****************  Fleuriste page  ****************-->
+  <!--    *************************************************--> 
+    <div id="mobilier" style="margin-bottom:7px;"> 
+      <div  data-role="collapsible" style="background-color:#ffffff!important; color:#373737!important">
+              <h1><img id="imgRose" src="img/rose.png"/>Fleuriste </h1>
+              <div id="mobilierDIV"> 
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                Fleuriste Chez Janot.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3>
+                              <!-- <span  style="color: #ffffff; background-color: #C45500!important; font-size: 4vw;">10%</span> -->
+                              <span id="oct">10%</span>
+                              <span id="shape"></span> <br>
+                              vous sera accordé sur le prix régulier, excluant les périodes suivantes : 
+                              Noël, St-Valentin, Pâques, Fête des mères, Fête des pères.
+                            </h3>
+                            <!-- <div>
+
+                            </div> -->
+                            <h4>
+                            413, route 204 Nord, Saint-Gédéon<br>
+                              <a href="tel:418 582-3430" style="color:#0066c0!important;"> 418 582-3430</a>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                Fleuriste Giguère.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3>
+                                    <span id="oct">15%</span>
+                                    <span id="shape"></span> <br> sur toute marchandise (à compter de 2019).
+                            </h3>
+                            <h4>
+                            12600, 1e Ave Est, Saint-Georges<br>
+                              <a href="tel:418 228-6684" style="color:#0066c0!important;"> 418 228-6684</a><br>
+                              <a href="tel:1 800-463-6084" style="color:#0066c0!important;"> 1 800-463-6084</a>
+                            </h4>
+                    </div>
+              </div>
+      </div>
+    </div>
+  <!--    ***************    Mécanique  page    ***************-->
+  <!--    ****************************************************************--> 
+    <div id="provinciaux" style="background-color:#ffffff!important; color:#373737!important; margin-bottom:7px;"> 
+      <div data-role="collapsible"> 
+              <h1> <img id="imgMecanic" src="img/hand.png" /> Mécanique </h1>
+              <div id="provinciauxDIV"> 
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                Garage P.A. Roy inc.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3>
+<ul>
+    <li>
+        Essence, pneus, mécanique générale, diagnostique et injection électronique
+    </li>
+    <li>
+        Pour tous les employés du Groupe Canam, nous offrons de prendre et de retourner votre véhicule gratuitement, 
+            et de plus nous disposons d'un véhicule de courtoisie.
+    </li>
+    <li>
+        <b>PNEUS</b> : à l'achat de pneus neufs pour automobiles ou camionnettes, obtenez 5 $ de rabais par pneu.
+    </li>
+    <ul>
+            <b>CONDITIONS POUR PNEUS ET MÉCANIQUE :</b>
+            <li> Les rabais ci-dessus sont applicables sur les véhicules qui sont la propriété du détenteur de la carte.</li>
+            <li> Les rabais ci-dessus sont applicables lors du paiement complet de la facture, soit comptant, par chèque ou par carte de débit.</li>
+            <li> Les rabais ne pourront pas s'appliquer lors d'un paiement par carte de crédit, lors d'un paiement différé ou à crédit></li>
+    </ul>
+</ul>
+                              <!-- <span style="color: #0066c0; font-size: 4vw;">15%</span>de rabais du lundi au vendredi sur les menus midi. -->
+                            </h3>
+                            <h4>
+                            326, Route 204 Sud, Saint-Martin<br>
+                              <a href="tel:418 382-5411" style="color:#0066c0!important;">418 382-5411</a>
+                              <a href="mailto:garageparoy@xplornet.com" style="color: #2192c1!important;">garageparoy@xplornet.com</a>
+                            </h4>
+                        </div> 
+                        <hr>
+
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                    NAPA pièces d’auto.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3>
+                                        <span id="oct">7%</span>
+                                        <span id="shape"></span> <br>
+                                        vous sera accordé sur le total de votre facture, vous devrez donner le numéro de compte 9960. 
+                                </h3>
+                                <h4>
+                                        440, Route 204 Nord, Saint-Gédéon<br>
+                                  <a href="tel:418 582-3314" style="color:#0066c0!important;"> 418 582-3314</a><br>
+                                </h4>
+
+                                <h4>
+                                        116450, 1re Ave, Saint-Georges<br>
+                                  <a href="tel:418 228-8822" style="color:#0066c0!important;"> 418 228-8822</a><br>
+                                </h4>
+                                <h4>
+                                        326, Route 204 Sud, Sainte-Marie<br>
+                                  <a href="tel:418 397-6112" style="color:#0066c0!important;"> 418 397-6112</a><br>
+                                </h4>
+                                <h4>
+                                        300, 14e Ave, La Guadeloupe<br>
+                                  <a href="tel:418 459-6414" style="color:#0066c0!important;"> 418 459-6414</a><br>
+                                </h4>
+                        </div>
+              </div>
+      </div>
+    </div>
+  <!--    ***************    Prêt à porter page    ***************-->
+  <!--    ****************************************************************--> 
+   <div id="provinciaux" style="background-color:#ffffff!important; color:#373737!important; margin-bottom:7px;"> 
+        <div data-role="collapsible"> 
+            <h1> <img id="imgCloth" src="img/clothing-hanger.png"/> Prêt à porter </h1>
+            <div id="provinciauxDIV"> 
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                Boutique MMEN.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3>
+                                    <span id="oct">10%</span>
+                                    <span id="shape"></span> <br> sur toute marchandise à prix régulier.
+                            </h3>
+                            <h4>
+                                12221, 1re Avenue, Saint-Georges<br>
+                              <a href="tel:418 227-3747" style="color:#0066c0!important;"> 418 227-3747</a>
+                            </h4>
+                    </div> 
+                          <hr>
+                          <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                    Canadian Tire St-Georges.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3>
+                                        <span id="oct">15%</span>
+                                        <span id="shape"></span> <br>de rabais (sur le prix régulier) pour l’achat de 
+                                        bottes de travail.
+                                </h3>
+                                <h4>
+                                    500, 107e Rue, Saint-Georges<br>
+                                  <a href="tel:418 228-8843" style="color:#0066c0!important;">418 228-8843</a>
+                                </h4>
+                        </div> 
+                              <hr>
+                              <div>
+                                    <a
+                                      href=""
+                                      target="_blank"
+                                      style="color:#bfa050;" 
+                                      align="center" 
+                                      style="color: #bfa050"></a>
+                                      <h2>
+                                        Le Spécialiste du Travailleur Inc.
+                                      </h2>
+                                    <i class="fas fa-utensils"></i>
+                                    <i class="fa fa-futboll-0"></i> 
+                                    <h3>
+                                            <span id="oct">20%</span>
+                                            <span id="shape"></span> <br>vous sera accordé en 2018 et 2019.
+                                    </h3>
+                                    <h4>
+                                        10225-1, boul. Lacroix, Saint-Georges <br>
+                                      <a href="tel:418 228-7676" style="color:#0066c0!important;">418 228-7676</a>
+                                    </h4>
+                            </div> 
+                                  <hr>
+                                  <div>
+                                        <a
+                                          href=""
+                                          target="_blank"
+                                          style="color:#bfa050;" 
+                                          align="center" 
+                                          style="color: #bfa050"></a>
+                                          <h2>
+                                            Linde.
+                                          </h2>
+                                        <i class="fas fa-utensils"></i>
+                                        <i class="fa fa-futboll-0"></i> 
+                                        <h3>
+                                                <span id="oct">25%</span>
+                                                <span id="shape"></span> <br>Bottes, chemise, pantalon et jackets.<br>
+                                                <span id="oct">15%</span>
+                                                <span id="shape"></span> <br>Pour tous les accessoires 
+                                                (ex. : électrode, fil à souder, masque à soudé).
+                                        </h3>
+                                        <h4>
+                                          15550 boul. Lacroix, Saint-Georges <br>
+                                          <a href="tel:418 228-3272" style="color:#0066c0!important;">418 228-3272</a>
+                                        </h4>
+                                </div> 
+                                      <hr>
+                                      <div>
+                                            <a
+                                              href=""
+                                              target="_blank"
+                                              style="color:#bfa050;" 
+                                              align="center" 
+                                              style="color: #bfa050"></a>
+                                              <h2>
+                                                Équipement R. Quirion.
+                                              </h2>
+                                            <i class="fas fa-utensils"></i>
+                                            <i class="fa fa-futboll-0"></i> 
+                                            <h3>  <span style="font-weight: bold;">Chemises :</span><br>
+                                                    <span id="oct">19,33 $</span>
+                                                    <span id="shape"></span> <br>Small à X-Large.<br>
+                                                    <span id="oct">22,23 $</span>
+                                                    <span id="shape"></span> <br>XX-Large à XXX-Large.<br>
+                                                    <span style="font-weight: bold;">Pantalons, 30 à 44 :</span><br>
+                                                    <span id="oct">15,98 $</span>
+                                                    <span id="shape"></span> <br><br>
+                                                    <span style="font-weight: bold;">Bottes de travail:</span><br>
+                                                    <span id="oct">5%</span>
+                                                    <span id="shape"></span> <br>
+                                            </h3>
+                                            <h4>
+                                                103, rue Cordi, Parc Industriel, Saint-Gédéon <br>
+                                              <a href="tel:418 582-3005" style="color:#0066c0!important;">418 582-3005</a>
+                                            </h4>
+                                    </div> 
+                                          <hr>
+            </div>
+        </div>
+    </div>
+  <!--    ***************    Informatique page    ***************-->
+  <!--    ****************************************************************--> 
+   <div id="provinciaux" style="background-color:#ffffff!important; color:#373737!important; margin-bottom:7px;"> 
+        <div data-role="collapsible"> 
+            <h1> <img id="imgFlash" src="img/flash.png" /> Informatique </h1>
+            <div id="provinciauxDIV"> 
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                Teslus.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">30%</span>
+                                    <span id="shape"></span> <br> sur le forfait à la carte sans fil de votre choix<br>
+                            </h3>
+                            <h4>
+                                Contacter : Marie-Soleil B.Nadeau<br>
+                              <a href="tel:418 227 8343" style="color:#0066c0!important;">418 227 8343</a><br>
+                              <a href="mailto:boutique.stgeorges@nncsolutions.com" style="color:#0066c0!important;">boutique.stgeorges@nncsolutions.com</a>
+                            </h4>
+                    </div> 
+                          <hr>
+                          <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                    Dell.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3>Jusqu'à</h3>
+                                <h3> 
+                                       <span id="oct">5%</span>
+                                        <span id="shape"></span> <br> de remise sur certains accesoires et appareils électroniques. <br>
+                                        Plus d'information sur <a href="Dell.ca/fidelisation"> Dell.ca/fidelisation</a><br>
+                                </h3>
+                                <h3>
+                                    Magasinez dès aujourd'hui pour bénéficier de vos avantages <a href=" Dell.ca/PAM"> Dell.ca/PAM</a><br>
+                                </h3>
+                        </div>
+
+            </div>
+        </div>
+    </div>
+    <!--    ***************    Hébergement page    ***************-->
+    <!--    ****************************************************************--> 
+    <div id="provinciaux" style="background-color:#ffffff!important; color:#373737!important; margin-bottom:7px;"> 
+         <div data-role="collapsible"> 
+            <h1> <img id="imgBed" src="img/bed.png"/> Hébergement </h1>
+            <div id="provinciauxDIV"> 
+                    <div>
+                        <h1 style="text-align: center;"> Canada</h1>
+                            <h1>BOUCHERVILLE, QUÉBEC</h1>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    HOLIDAY INN Montréal-Longueuil.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    900 St-Charles Est, Longueuil, QC J4H 3Y2<br>
+                              <a href="tel:1 800 263-0159" style="color:#0066c0!important;">1 800 263-0159 </a> ou <a href="tel:450 646-8100" style="color:#0066c0!important;">450 646-8100</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    HÔTEL MORTAGNE.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    1228 rue Nobel, Boucherville, QC J4B 5H1<br>
+                              <a href="tel:1 877 655-9966" style="color:#0066c0!important;">1 877 655-9966 </a> ou <a href="tel:450 655-9966" style="color:#0066c0!important;">450 655-9966</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <h1>CALGARY, ALBERTA</h1>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    CARRIAGE HOUSE INN.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    9030, MacLeod Trail South, Calgary, AB T2H 0M4<br>
+                              <a href="tel:1 800 661-9566" style="color:#0066c0!important;">1 800 661-9566 </a> ou <a href="tel:403 253-1101" style="color:#0066c0!important;">403 253-1101</a><br>
+                              <a href="mailto:reserv@carriagehouse.net" style="color:#0066c0!important;">reserv@carriagehouse.net</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    HOLIDAY INN CALGARY MACLEOD TRAIL SOUTH.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif ou code #100225120<br>
+                            </h3>
+                            <h4>
+                                    4206 Macleod Trail South, Calgary, AB T2G 2R7<br>
+                              <a href="tel:1 866 554-0162" style="color:#0066c0!important;">1 866 554-0162 </a> ou <a href="tel:403 287-2700" style="color:#0066c0!important;">403 287-2700</a><br>
+                              <a href="mailto:reservations@hihotelcalgary.ca" style="color:#0066c0!important;">reservations@hihotelcalgary.ca</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <h1>EDMONTON, ALBERTA</h1>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    COMFORT INN & SUITES DOWNTOWN EDMONTON.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner LCAN pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    10425 100 Avenue, Edmonton, AB T5J 0A3<br>
+                              <a href="tel:1 888 384-6835" style="color:#0066c0!important;">1 888 384-6835 </a> ou <a href="tel:780 423-5611" style="color:#0066c0!important;">780 423-5611</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <h1>LAVAL, QUÉBEC</h1>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                COMFORT INN - LAVAL.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    2055 boul. des Laurentides, Laval, QC H7H 3C8<br>
+                              <a href="tel:1 877 574-6835" style="color:#0066c0!important;">1 877 574-6835</a> ou <a href="tel:450 686-0600" style="color:#0066c0!important;">450 686-0600</a><br>
+                              <a href="mailto:cn331@whg.com" style="color:#0066c0!important;">cn331@whg.com</a><br>
+
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    HOLIDAY INN LAVAL MONTRÉAL.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    2900 boul. le Carrefour, Laval, QC H7T 2K9<br>
+                              <a href="tel:1 888 333-3140" style="color:#0066c0!important;">1 888 333-3140 </a> ou <a href="tel:450 682-9000" style="color:#0066c0!important;">450 682-9000</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                        <h1>MONCTON, NOUVEAU BRUNSWICK
+                            </h1>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    CHÂTEAU MONCTON HOTEL & SUITES.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    100 Main Street, Moncton, NB E1C 1B9<br>
+                              <a href="tel:1 800 870-4444" style="color:#0066c0!important;">1 800 870-4444 </a> ou <a href="tel:506 870-4444" style="color:#0066c0!important;">506 870-4444</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    CROWNE PLAZA MONCTON DOWNTOWN.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    1005 Main Street, Moncton, NB E1C 1G9<br>
+                              <a href="tel:506 853-3964" style="color:#0066c0!important;">506 853-3964 </a> <br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <h1>MONTRÉAL, QUÉBEC (AÉROPORT DE DORVAL)</h1>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    CROWNE PLAZA AÉROPORT DE MONTRÉAL AIRPORT.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    6600 Côte-de-Liesse, Montréal, QC H4T 1E3<br>
+                              <a href="tel:1 877 344-1999" style="color:#0066c0!important;">1 877 344-1999 </a> ou <a href="tel:514 344-1999" style="color:#0066c0!important;">514 344-1999</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    QUALITY HOTEL DORVAL.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    7700 Côte de Liesse, Saint-Laurent, QC H4T 1E7<br>
+                              <a href="tel:1 800 361-6243" style="color:#0066c0!important;">1 800 361-6243 </a> ou <a href="tel:514 731-4890" style="color:#0066c0!important;">514 731-4890</a><br>
+                              <a href="mailto:info@qualityhoteldorval.com" style="color:#0066c0!important;">info@qualityhoteldorval.com </a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <h1>MONTRÉAL, QUÉBEC (CENTRE-VILLE)</h1>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    ALT HOTEL MONTRÉA.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif ou code #437618<br>
+                            </h3>
+                            <h4>
+                                    120 Rue Peel, Montréal, QC H3C 0L8<br>
+                              <a href="tel:1 855 823-8120" style="color:#0066c0!important;">1 855 823-8120</a> ou <a href="tel: 514 375-0220" style="color:#0066c0!important;"> 514 375-0220</a><br>
+                              <a href="mailto:reservations.montreal@althotels.ca" style="color:#0066c0!important;">reservations.montreal@althotels.ca </a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    LE NOUVEL HÔTEL & SPA.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    1740 René-Lévesque Ouest, Montréal, QC H3H 1R3<br>
+                              <a href="tel:1 800 363-6063" style="color:#0066c0!important;">1 800 363-6063</a> ou <a href="tel:514 931-8841" style="color:#0066c0!important;">514 931-8841</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                        <h1>OTTAWA, ONTARIO</h1>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    BEST WESTERN PLUS VICTORIA PARKS SUITES.
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif ou code 01573010<br>
+                            </h3>
+                            <h4>
+                                    377 O'Connor Street, Ottawa, ON K2P 2M2<br>
+                              <a href="tel:1 800 634-9876" style="color:#0066c0!important;">1 800 634-9876 </a> ou <a href="tel:613 567-7275" style="color:#0066c0!important;">613 567-7275</a><br>
+                              <a href="www.bestwestern.com/canam-fr" style="color:#0066c0!important;">www.bestwestern.com/canam-fr </a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                        <h1>QUÉBEC, QUÉBEC</h1>
+                            <a
+                              href=""
+                              target="_blank"
+                              style="color:#bfa050;" 
+                              align="center" 
+                              style="color: #bfa050"></a>
+                              <h2>
+                                    GRAND TIMES HOTEL (Aéroport de Québec).
+                              </h2>
+                            <i class="fas fa-utensils"></i>
+                            <i class="fa fa-futboll-0"></i> 
+                            <h3> 
+                                    <span id="oct">Tarifs corporatifs</span>
+                                    <span id="shape"></span> <br> réservation téléphonique : 
+                                    mentionner CANAM pour obtenir tarif corporatif<br>
+                            </h3>
+                            <h4>
+                                    6515 boul. Wilfrid-Hamel, Ancienne-Lorette, QC G2E 5W3<br>
+                              <a href="tel:1 888 902-4444" style="color:#0066c0!important;">1 888 902-4444</a> ou <a href="tel:418 877-7788" style="color:#0066c0!important;">418 877-7788</a><br>
+                            </h4>
+                    </div> 
+                    <hr>
+                    <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        GRAND TIMES HOTEL (Galeries de la Capitale).
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        5100, Boulevard des Galeries, Québec, QC G2K 2M1 <br>
+                                  <a href="tel:1 888 902-5555" style="color:#0066c0!important;">1 888 902-5555</a> ou <a href="tel:418 353-3333" style="color:#0066c0!important;">418 353-3333</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        MARRIOTT COURTYARD QUÉBEC.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif ou code promo en ligne CZS<br>
+                                </h3>
+                                <h4>
+                                        900 des Rocailles, Québec, QC G2J 0A5 <br>
+                                  <a href="tel:418 380-2700" style="color:#0066c0!important;">418 380-2700</a> <br>
+                                  <a href="www.marriott.com/yqbcq" style="color:#0066c0!important;">www.marriott.com/yqbcq</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>SAINT-GEORGES, QUÉBEC</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        COMFORT INN SAINT-GEORGES.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        16525 boul. Lacroix, Saint-Georges, QC G5Y 2G2<br>
+                                  <a href="tel:1 877 230-1230" style="color:#0066c0!important;">1 877 230-1230</a> ou <a href="tel:418 227-1227" style="color:#0066c0!important;">418 227-1227</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        LE GEORGESVILLE.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        300 118e Rue, Saint-Georges, QC G5Y 3E3<br>
+                                  <a href="tel:1 800 463-3003" style="color:#0066c0!important;">1 800 463-3003</a> ou <a href="tel:418 227-3000" style="color:#0066c0!important;">418 227-3000</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>SHAWINIGAN, QUÉBEC</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        AUBERGE GOUVERNEUR SHAWINIGAN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner TECFAB/CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        1100 Promenade du Saint-Maurice, Shawinigan, QC G9N 1L8<br>
+                                  <a href="tel:1 888 922-1100" style="color:#0066c0!important;">1 888 922-1100</a> ou <a href="tel:819 537-6000" style="color:#0066c0!important;">819 537-6000</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>TERREBONNE, QUÉBEC</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        IMPERIA HÔTEL - SUITES .
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        2935 boul. de la Pinière, Terrebonne, QC J6X 0A3<br>
+                                  <a href="tel:1-888-472-3336" style="color:#0066c0!important;">1-888-472-3336</a> ou <a href="tel:450 492-3336" style="color:#0066c0!important;">450 492-3336</a><br>
+                                  <a href="mailto:" style="color:#0066c0!important;">terrebonneinfo@imperiahotel.com</a> <br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>TORONTO AÉROPORT (MISSISSAUGA), ONTARIO </h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        ALT HOTEL TORONTO AIRPORT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif ou code #437618<br>
+                                </h3>
+                                <h4>
+                                        6080 Viscount Road, Mississauga, ON L4V 0A1<br>
+                                  <a href="tel:1 855 855-6080" style="color:#0066c0!important;">1 855 855-6080</a> ou <a href="tel:905 362-4337" style="color:#0066c0!important;">905 362-4337</a><br>
+                                  <a href="mailto:reservations.toronto@althotels.ca" style="color:#0066c0!important;">reservations.toronto@althotels.ca</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        FAIRFIELD INN & SUITES TORONTO AIRPORT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif ou code CZS<br>
+                                </h3>
+                                <h4>
+                                        3299 Caroga Drive, Mississauga, ON L4V 1A3<br>
+                                  <a href="tel:1 800 603-7307" style="color:#0066c0!important;">1 800 603-7307</a> ou <a href="tel:905 673-9800" style="color:#0066c0!important;">905 673-9800</a><br>
+                                  <a href="www.marriott.com/yzfs" style="color:#0066c0!important;">www.marriott.com/yzfs</a> <br>
+
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>VANCOUVER/COQUITLAM, COLOMBIE BRITANNIQUE</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        EXECUTIVE PLAZA HOTEL COQUITLAM.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        405 North Road, Vancouver, BC V3K 3V9<br>
+                                  <a href="tel:1 888 433-3932" style="color:#0066c0!important;">1 888 433-3932</a> ou <a href="tel:604 936-9399" style="color:#0066c0!important;">604 936-9399</a><br>
+                                  <a href="mailto:reservationsc@executivehotels.net" style="color:#0066c0!important;">reservationsc@executivehotels.net</a> <br>
+
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>WINNIPEG, MANITOBA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        BEST WESTERN PLUS - PEMBINA INN & SUITES.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif ou code 01573010<br>
+                                </h3>
+                                <h4>
+                                        1714 Pembina Highway, Winnipeg, MB R3T 2G2<br>
+                                  <a href="tel:1 800 634-9876" style="color:#0066c0!important;">1 800 634-9876</a> ou <a href="tel:204 269-8888" style="color:#0066c0!important;">204 269-8888</a><br>
+                                  <a href="www.bestwestern.com/canam-fr" style="color:#0066c0!important;">www.bestwestern.com/canam-fr</a> <br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1 style="text-align: center;">ÉTATS-UNIS</h1>
+                        <h1>ALLENTOWN, PENNSYLVANIA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HILTON GARDEN INN ALLENTOWN WEST.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        230 Sycamore Rd, Breinigsville, PA 18031<br>
+                                  <a href="tel:1-800-445-8667" style="color:#0066c0!important;">1-800-445-8667</a> ou <a href="tel:610 398-6686" style="color:#0066c0!important;">610 398-6686</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>ATLANTA, GEORGIA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        GLENN HOTEL, AUTOGRAPH COLLECTION HOTELS.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        110 Marietta St. NW, Atlanta GA 30303<br>
+                                  <a href="tel:404 521-2250" style="color:#0066c0!important;">404 521-2250</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>BUCKEYE (GOODYEAR), ARIZONA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HAMPTON INN & SUITES.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        2000 North Litchfield Rd, Goodyear, AZ 85395<br>
+                                  <a href="tel:623 536-1313" style="color:#0066c0!important;">623 536-1313</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        RED LION INN & SUITES.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        1313 North Litchfield Rd, Goodyear, AZ 85395<br>
+                                  <a href="tel:623 535-1313" style="color:#0066c0!important;">623 535-1313</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>CLAREMONT, NEW HAMSHIRE</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        COMMON MAN INN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        21 Water Street, Claremont NH 03743<br>
+                                  <a href="tel:1 866 578-8111" style="color:#0066c0!important;">1 866 578-8111</a> ou <a href="tel:603 542-0647" style="color:#0066c0!important;">603 542-0647</a><br>
+                                </h4>
+                        </div> 
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HOLIDAY INN EXPRESS - SPRINGFIELD, VT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        818 Charlestown Road, Springfield, VT 05156<br>
+                                  <a href="tel:802 885-4516" style="color:#0066c0!important;">802 885-4516</a><br>
+                                </h4>
+                        </div> 
+                        <hr>    
+                        <h1>DEERFIELD BEACH (FORT LAUDERDALE), FLORIDE (Hambro)</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        COMFORT INN OCEANSIDE.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        50 S. Ocean Drive (A1A), Deerfield Beach, FL, 33441<br>
+                                  <a href="tel:1-800-445-8667" style="color:#0066c0!important;">1-800-445-8667</a> ou <a href="tel:610 398-6686" style="color:#0066c0!important;">610 398-6686</a><br>
+                                </h4>
+                        </div> 
+                        <hr>  
+                         <h1>FREDERICK (POINT OF ROCKS), MARYLAND</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HAMPTON INN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        5311 Buckeystown Pke, Frederick, MD 21703 (I-270 at Route 85)<br>
+                                  <a href="tel:301 698-2500" style="color:#0066c0!important;">301 698-2500</a><br>
+                                </h4>
+                        </div> 
+                        <hr> 
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HILTON GARDEN INN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        7226 Corporate Court, Frederick, MD 21703<br>
+                                  <a href="tel:1 866 909-6090" style="color:#0066c0!important;">1 866 909-6090</a><a href="tel:240 566-1500" style="color:#0066c0!important;">240 566-1500</a> <br>
+                                </h4>
+                        </div> 
+                        <hr>
+                         <h1>FORT LAUDERDALE, FLORIDA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        OCEAN SKY HOTEL & RESORT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        4060 Galt Ocean Drive, Fort Lauderdale, FL 33308-6597<br>
+                                  <a href="tel:1 800 678-9022" style="color:#0066c0!important;">1 800 678-9022</a> ou <a href="tel:954 565-6611" style="color:#0066c0!important;">954 565-6611</a><br>
+                                </h4>
+                        </div> 
+                        <hr> 
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        THE WESTIN FORT LAUDERDALE.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner Steel Fabricators LLC Code 398531<br>
+                                </h3>
+                                <h4>
+                                        400 Corporate Drive, Fort Lauderdale, FL 33334<br>
+                                  <a href="tel:1 800-325-2525" style="color:#0066c0!important;">1 800-325-2525</a><br>
+                                  <a href="www.westinfortlauderdalehotel.com/steel" style="color:#0066c0!important;">www.westinfortlauderdalehotel.com/steel</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                         <h1>JACKSONVILLE, FLORIDA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        DOUBLE TREE BY HILTON JACKSONVILLE AIRPORT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        2101 Dixie Clipper Drive, Jacksonville, FL 32218<br>
+                                  <a href="tel:904 741-1997" style="color:#0066c0!important;">904 741-1997</a><br>
+                                </h4>
+                        </div> 
+                        <hr>  
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        LEXINGTON HOTEL & CONFERENCE CENTER.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        1515 Prudential Drive, Jacksonville, FL 32207<br>
+                                  <a href="tel:904 396-5100" style="color:#0066c0!important;">904 396-5100</a><br>
+                                </h4>
+                        </div> 
+                        <hr>                       
+                        <h1>NEW ORLEANS (KENNER), LOUISIANA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HILTON NEW ORLEANS AIRPORT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM GROUP code #N2975418<br>
+                                </h3>
+                                <h4>
+                                        901 Airline Drive, Kenner, LA 70062<br>
+                                  <a href="tel:504 469-5000" style="color:#0066c0!important;">504 469-5000</a> ou <a href="tel:610 398-6686" style="color:#0066c0!important;">610 398-6686</a><br>
+                                </h4>
+                        </div> 
+                        <hr>                        
+                        <h1>ORLANDO, FLORIDA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        CROWNE PLAZA ORLANDO-DOWNTOWN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM GROUP code #TBD<br>
+                                </h3>
+                                <h4>
+                                        304 W Colonial Drive, Orlando, FL 32801<br>
+                                  <a href="tel:1 888 295-7563" style="color:#0066c0!important;">1 888 295-7563</a> ou <a href="tel:407 843-8700" style="color:#0066c0!important;">407 843-8700</a><br>
+                                  <a href="www.downtowncrowne.com" style="color:#0066c0!important;">www.downtowncrowne.com</a>                                  www.downtowncrowne.com
+                                </h4>
+                        </div> 
+                        <hr>                       
+                         <h1>PERU, ILLINOIS</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HAMPTON INN & SUITES.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        4421 Peoria Street, Peru, IL 61354<br>
+                                  <a href="tel:815 220-8400" style="color:#0066c0!important;">815 220-8400</a> ou <a href="tel:610 398-6686" style="color:#0066c0!important;">610 398-6686</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HOLIDAY INN EXPRESS & SUITES.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        5253 Trompeter Road, Peru, IL 61354<br>
+                                  <a href="tel:815 224-2500" style="color:#0066c0!important;">815 224-2500</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>SOUTH PLAINFIELD, NEW JERSEY</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HAMPTON INN SOUTH PLAINFIELD.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        205 New World Way, South Plainfield, NJ 07080<br>
+                                  <a href="tel:908 561-2600" style="color:#0066c0!important;">908 561-2600</a> <br>
+                                </h4>
+                        </div> 
+                        <hr>  
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HOLIDAY INN SOUTH PLAINFIELD-PISCATAWAY.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL, code: IL7QK<br>
+                                </h3>
+                                <h4>
+                                        4701 Stelton Road, South Plainfield, NJ 07080<br>
+                                  <a href="tel:908 753-5500" style="color:#0066c0!important;">908 753-5500</a> <br>
+                                </h4>
+                        </div> 
+                        <hr> 
+                         <h1>SUNNYSIDE, WASHINGTON</h1> <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        BEST WESTERN PLUS - GRAPEVINE INN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM GROUP, code 01573010<br>
+                                </h3>
+                                <h4>
+                                        1849 Quail Lane, Sunnyside, WA 98944-9402<br>
+                                  <a href="tel:509 839-6070" style="color:#0066c0!important;">509 839-6070</a> <br> 
+                                  <a href="www.bestwestern.com/canam‐fr" style="color:#0066c0!important;">www.bestwestern.com/canam‐fr</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>WACO, TEXAS</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        WACO, TX COURTYARD BY MARRIOTT.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        101 Washington Ave, Waco, TX 76701<br>
+                                  <a href="tel:254 759-5119" style="color:#0066c0!important;">254 759-5119</a> ou <a href="tel:254 752-8686" style="color:#0066c0!important;">254 752-8686</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>WASHINGTON (ST-LOUIS), MISSOURI</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        BEST WESTERN PLUS WASHINGTON HOTEL.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        2621 E. 5th Street, Washington, MO 63090-3856<br>
+                                  <a href="tel:636 390-8877" style="color:#0066c0!important;">636 390-8877</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        OLD DUTCH INN AND TAVERN.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        227 Elm Street, Washington, MO 63090<br>
+                                  <a href="tel: 636 390-4400" style="color:#0066c0!important;"> 636 390-4400</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <h1>WINSTON-SALEM, NORTH CAROLINA</h1>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        DOUBLETREE BY HILTON.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM pour obtenir tarif corporatif<br>
+                                </h3>
+                                <h4>
+                                        5790 University Parkway, Winston-Salem, NC 27105<br>
+                                  <a href="tel:336-767-9595" style="color:#0066c0!important;">336-767-9595</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+                        <div>
+                                <a
+                                  href=""
+                                  target="_blank"
+                                  style="color:#bfa050;" 
+                                  align="center" 
+                                  style="color: #bfa050"></a>
+                                  <h2>
+                                        HOLIDAY INN EXPRESS - KERNERSVILLE.
+                                  </h2>
+                                <i class="fas fa-utensils"></i>
+                                <i class="fa fa-futboll-0"></i> 
+                                <h3> 
+                                        <span id="oct">Tarifs corporatifs</span>
+                                        <span id="shape"></span> <br> réservation téléphonique : 
+                                        mentionner CANAM STEEL<br>
+                                </h3>
+                                <h4>
+                                        1570 Highway 66 South, Kernersville, NC 27284<br>
+                                  <a href="tel:336 564-3333" style="color:#0066c0!important;">336 564-3333</a><br>
+                                </h4>
+                        </div> 
+                        <hr>
+            </div>
+        </div>
+    </div>
+         <!--    ****************  Autre page  ****************-->
+  <!--    *************************************************--> 
+  <div id="mobilier" style="margin-bottom:7px;"> 
+        <div  data-role="collapsible" style="background-color:#ffffff!important; color:#373737!important">
+                <h1><img id="imgAll" src="img/all.png"/>Autre </h1>
+                <div id="mobilierDIV"> 
+                      <div>
+                              <a
+                                href=""
+                                target="_blank"
+                                style="color:#bfa050;" 
+                                align="center" 
+                                style="color: #bfa050"></a>
+                                <h2>
+                                Centre de peinture Pierre Tanguay Inc.
+                                </h2>
+                              <i class="fas fa-utensils"></i>
+                              <i class="fa fa-futboll-0"></i> 
+                              <h3>
+                                <!-- <span  style="color: #ffffff; background-color: #C45500!important; font-size: 4vw;">10%</span> -->
+                                <span id="oct">5%</span>
+                                <span id="shape"></span> <br>
+                                À l’achat de tous les produits en magasin.
+                              </h3>
+                              <!-- <div>
+  
+                              </div> -->
+                              <h4>
+                                10465, 1re Avenue, Saint-Georges<br>
+                                <a href="tel:418 228-7920" style="color:#0066c0!important;"> 418 228-7920</a>
+                              </h4>
+                      </div> 
+                      <hr>
+                      <div>
+                              <a
+                                href=""
+                                target="_blank"
+                                style="color:#bfa050;" 
+                                align="center" 
+                                style="color: #bfa050"></a>
+                                <h2>
+                                    Ébénisterie Cuisibeauce Inc.
+                                </h2>
+                              <i class="fas fa-utensils"></i>
+                              <i class="fa fa-futboll-0"></i> 
+                              <h3><br> À l’achat d’armoire de cuisine, vous sera fourni gratuitement certains accessoires pour une valeur de 100 $.
+                              </h3>
+                              <h4>
+                                    165, boul. Canam Sud, Saint-Gédéon<br>
+                                <a href="tel:418 582-6515" style="color:#0066c0!important;"> 418 582-6515</a>
+                              </h4>
+                      </div>
+                </div>
+        </div>
+      </div>
+    <!-- fin de la liste des marchands -->
+  </div> 
+<!-- **************************************************** -->
+<!-- **************************************************** -->
+</div>
+   <div id="autre"></div>
+<!--    ***************       Footer      ***************-->
+<!--    *************************************************--> 
+    <div id="footer_2" data-role="footer" data-type="footer" data-position="fixed"  style="overflow:hidden; text-align: center;">
+<!--        data-id="persistent" to persist in the slide transition-->
+    <hp style="text-align:center;"><a  style="color: white;font-weight:medium !important;text-decoration: none !important;" href="http://www.amcreatives.ca" target="_blank">amcreatives.ca</a>&ensp;&ensp;&ensp;<a style="color: white;font-weight:medium !important;text-decoration: none !important;" href="http://amcreatives.ca/politique.html" target="_blank">politique de confidentialité </a></hp>
+    </div> <!-- Footer -->
+    
+    <script>
+        ListeDesMarchands();
+    </script>
+    
+</div><!-- /Page3 -->
+<!--
+    ****************************
+             page 4
+    ****************************
+-->
+<!--    Page des événements\activités-->
+<div data-role="page" id="page4"> 
+    <div data-role="header" class="header" style="overflow:hidden; background-color: #333; color: white;" data-id="persistent" data-position="fixed">
+        <h1 class="bkg-Orange" style=" font-weight:normal !important;font-size: 1.1em;"> Événements/Activités</h1>
+        <a data-id="persistent" href="#page2" class="bkg-Orange" data-transition="slide" > Carte</a>
+    </div>
+    <div>
+        
+        <script type="text/javascript" charset="utf-8">             
+        function events() {
+            var url = "http://amcreatives.ca/VircaEvenements/";
+//            var url = localStorage.urlEvents;
+            var target = "_self";
+            var options = "location=yes,clearcache=yes,footer=yes,";
+            
+            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
+            inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
+            
+            function loadStartCallBack() {
+                $('#status-message').text("En chargement ...");
+            }
+
+            } //onDeviceReady
+        </script>
+        
+        <!--    ***************       Footer      ***************-->
+    <!--    *************************************************--> 
+        <div id="footer_2" data-role="footer" data-type="footer" data-position="fixed"  style="overflow:hidden; text-align: center;">
+    <!--        data-id="persistent" to persist in the slide transition-->
+        <hp style="text-align:center;"><a  style="color: white;font-weight:normal !important;text-decoration: none !important;" href="http://www.amcreatives.ca" target="_blank">amcreatives.ca</a></hp>
+        </div> <!-- Footer -->
+    </div>
+</div>  <!--   /page 4  -->
+
+
+<!--
+    ****************************
+             page 5
+    ****************************
+-->
+<!--    Page des offres spéciales des marchands-->
+<div data-role="page" id="page5"> 
+    <div data-role="header" style="overflow:hidden;background-color: #333; color: white;" data-id="persistent" data-position="fixed">
+        <h1 class="bkg-Orange" style=" font-weight:normal !important;font-size: 1.1em;"> Offres spéciales</h1>
+        <a data-id="persistent" href="#page2" class="bkg-Orange" data-transition="slide" > Carte</a>
+        <a data-id="persistent" href="#page3" class="bkg-Orange" data-transition="slide"> Liste des marchands</a>
+    </div>
+<div>
+    
+        <script type="text/javascript" charset="utf-8">             
+        function offres() {
+            var url = "http://amcreatives.ca/VircaOffres/";
+            var target = "_self";
+            var options = "location=yes,clearcache=yes,footer=yes,closebuttoncaption='retour'";
+            
+            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
+            inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
+            
+            function loadStartCallBack() {
+                $('#status-message').text("En chargement ...");
+            }
+
+            } //onDeviceReady
+        </script>
+   
+<!--    ***************       Footer      ***************-->
+<!--    *************************************************--> 
+    <div id="footer_2" data-role="footer" data-type="footer" data-position="fixed"  style="overflow:hidden; text-align: center;">
+<!--        data-id="persistent" to persist in the slide transition-->
+    <hp style="text-align:center;"><a  style="color: white; font-weight:normal !important;text-decoration: none !important;" href="http://www.amcreatives.ca" target="_blank">amcreatives.ca</a></hp>
+    </div> <!-- Footer -->
+</div>
+</div>  <!--   /page 5  -->
+    
+</body>
+</html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.amcreatives.virka"
+    versionCode = "02"      
+   version     = "1.0.1" > 
+<access origin="https://5m1qfi37ie.execute-api.eu-west-1.amazonaws.com/Dev/emailCode"/>
+<!--<access origin="https://mr0pwkh059.execute-api.eu-west-1.amazonaws.com/Dev/emailCode"/>-->
+<access origin="https://s3-eu-west-1.amazonaws.com/virtualcard/*"/>
+
+    
+<!--================================================================================-->
+<!--    ====================   Set up Splash Screen ==================== -->
+<!--================================================================================-->
+    	
+<plugin name="cordova-plugin-splashscreen" source="npm" />
+<!--    ==================== iPhone ========================-->    
+<!-- iPhone and iPod touch -->
+<splash src="img/splash/iOS/splash-iOS_320-480.png" platform="ios" width="320" height="480" />
+<splash src="img/splash/iOS/splash-iOS_640-960.png" platform="ios" width="640" height="960" />
+
+<!-- iPhone 5 / iPod Touch (5th Generation) -->
+<splash src="img/splash/iOS/splash-iOS_640-1136.png" platform="ios" width="640" height="1136" />
+
+<!-- iPhone 6 -->
+<splash src="img/splash/iOS/splash-iOS_750-1334.png" platform="ios" width="750" height="1334" />
+<splash src="img/splash/iOS/splash-iOS_1242-2208.png" platform="ios" width="1242" height="2208" />
+<splash src="img/splash/iOS/splash-iOS_2208-1242.png" platform="ios" width="2208" height="1242" />
+
+<!--    ==================== iPhone ========================-->
+
+<!--    ==================== Android ========================-->
+<!--<splash src="img/splash/Android/ldpi.png" platform="android" qualifier="ldpi" />     -->
+    <!-- ldpi.png: 200x320px-->
+<!--<splash src="img/splash/Android/mdpi.png" platform="android" qualifier="mdpi" />      -->
+    <!-- mdpi.png : 320x480px-->
+<!--<splash src="img/splash/Android/hdpi.png" platform="android" qualifier="hdpi" />     -->
+    <!-- hdpi.png : 480x800px-->
+<!--<splash src="img/splash/Android/xhdpi.png" platform="android" qualifier="xhdpi" />   -->
+    <!-- xhdpi.png: 720px1280px-->
+    
+<splash src="img/splash/Android/360-240.png" platform="android" qualifier="ldpi" />
+<splash src="img/splash/Android/480-320.png" platform="android" qualifier="mdpi" />
+<splash src="img/splash/Android/720-480.png" platform="android" qualifier="hdpi" />
+<splash src="img/splash/Android/960-640.png" platform="android" qualifier="xhdpi" />  
+    
+<!--
+<splash src="fr-xhdpi.png" platform="android" qualifier="fr-xhdpi" />
+<splash src="portrait-xxhdpi.png" platform="android" qualifier="port-xxhdpi" />
+<splash src="landscape-xxhdpi.png" platform="android" qualifier="land-xxhdpi" />
+<splash src="xxxhdpi.png" platform="android" qualifier="xxxhdpi" />
+-->
+<!--    ==================== Android ========================-->
+<splash src="splash.png" />
+<!--================================================================================-->
+<!--================================================================================-->
+    
+    
+<!-- versionCode is optional and Android only -->
+<plugin name="cordova-plugin-whitelist" source="npm"/>
+    
+<!--    for the interaciton and the management of the iframes-->
+<plugin name="cordova-plugin-inappbrowser" source="npm"/>
+ 
+<!--    Cache Clear-->
+<!--<plugin name="cordova-plugin-cache-clear" source="npm"/>-->
+    
+<!--    From OneSignal Web site Doc-->
+<gap:plugin name="onesignal-cordova-plugin" spec="2.4.5" source="npm" />
+    
+<name>Virka</name>
+<allow-intent href="http://*/*" />
+<allow-intent href="https://*/*" />
+    
+<allow-intent href="tel:*"/>
+<!--<allow-intent href="sms:*"/>-->
+<allow-intent href="mailto:*"/>
+
+<!--    to allow ccsg iFrame only-->
+<!--    <allow-navigation href="http://www.ccstgeorges.com/" />-->
+    
+<!--    To allow any iFrame-->
+<allow-navigation href="*" />
+    
+<platform name = 'android'>
+<!--    <icon src='icons/android/ldpi.png' platform='android' qualifier='ldpi' />-->
+    
+<!--  ==============  Icon à changer ============== -->
+    <icon src="icon.png"/> 
+<!--==========================================-->
+
+</platform>
+    
+<!--  ==============  Icon à changer ============== -->
+<platform name = 'ios'>
+    <icon src='icon_iOS_1024x1024.png' platform='ios' width='1024' height='1024' />
+    <icon src='icon_iOS_152x152.png' platform='ios' width='152' height='152' />
+    <icon src='icon_iOS_120x120.png' platform='ios' width='120' height='120' />
+    <icon src='icon_iOS_76x76.png' platform='ios' width='76' height='76' />
+    <icon src='icon_iOS_40x40.png' platform='ios' width='40' height='40' />
+</platform>
+<!--==========================================-->
+<platform name = 'winphone'>
+ <icon src="icon.png"/> 
+</platform>
+    
+<icon src="icon.png"/>
+  <description>
+      Carte de membre Virka.
+  </description>
+
+  <author href="www.amcreatives.ca" email="aboubakr.mekhatria@gmail.com">
+      amcreatives.ca Aboubakr Mekhatria
+  </author>
+
+   <preference name="orientation"  value="landscape"></preference>
+   <preference name="android-minSdkVersion" value="26" /> <!-- value="26" For Android version 8.0 and up-->
+
+<!--===========================================-->
+    <!-- Not to include for the current version 27 dec 2018-->
+
+
+
+<!-- Requires cli-8.0.0 but we recommend using the latest version. -->
+<preference name="phonegap-version" value="cli-8.0.0" />
+
+<preference name="android-build-tool" value="gradle" />
+<preference name="android-minSdkVersion" value="16" />
+<!--===========================================-->
+
+<!-- Can omit if not targetting Windows Phone -->
+<!--
+<preference name="windows-appx-target" value="8.1-phone" />
+<preference name="WindowsToastCapable" value="true" />
+-->
+    
+</widget>
+
+

@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
+    <title>Carte de membre virtuelle</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    
+</head>
+<body>
+<!--
+    ****************************
+             page 1
+    ****************************
+-->
+<div data-role="page" id="page1">
+    <div data-role="header" data-theme="a">
+        <h1> Identification de la carte de membre</h1>
+    </div> <!-- header -->
+    <div role="main" data-role="content">
+        <form >
+          <label id="message"><p style="color: black !important;">Veuillez entrer votre courriel et votre code: </p></label> 
+          Courriel: <input type="text" id="email" name="email"><br>
+          Code: <input type="text" id="code" name="code"><br>
+            <button onclick="Validate()">Envoyer</button>
+<!--          <input type="submit" value="Submit" onclick="Validate()">-->
+        </form>
+        
+        <script>
+          $(function(){
+            if(localStorage.Email!=undefined && localStorage.code != undefined){
+                nameID = document.getElementById("name");
+                nameID.innerHTML = localStorage.name;
+                compagnyID = document.getElementById("compagny");
+                compagnyID.innerHTML = localStorage.compagny;                
+                window.location.href = "#page2";
+                }
+              else{
+                window.location.href = "#page1";
+              }
+          });
+        </script>
+        <script>
+    var tentative = 0;
+    function Validate(){        
+         email = document.getElementById('email').value;
+         code  = document.getElementById('code').value;        
+        $.ajax({
+//            url: 'http://localhost:4000/check',
+            url:'https://5m1qfi37ie.execute-api.eu-west-1.amazonaws.com/Dev/emailCode',
+//         url: '192.168.1.66/check',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({email, code}),
+            
+            success: function(res) {
+                if(res.answer == 'userFind'){
+                    nameID               = document.getElementById("name");
+                    nameID.innerHTML     = res.answer.name;
+                    compagnyID           = document.getElementById("compagny");
+                    compagnyID.innerHTML = res.answer.compagny;
+    //                Save user data in local Storage
+                    localStorage.Email    = email;
+                    localStorage.code     = code;
+                    localStorage.compagny = res.answer.compagny;
+                    localStorage.name     = res.answer.name;
+                    window.location.href = "#page2";
+                }
+                else if(res.answer == 'userNotFind'){
+                    tentative = tentative +1;
+                    nouveuMessage = document.getElementById('message');
+                    if(tentative < 2){
+                        nouveuMessage.innerHTML = "Le Courriel ou le code n'est pas correcte, veuillez rentrer de nouveau.";
+                    }
+                    else{
+                        nouveuMessage.innerHTML = "Veuillez contacter l'administration de la Chambre de commerce.";
+                        tentative = 0;
+                    }
+                }
+            },
+            error: function(res) {
+                alert("Erreur de lecture: "+ res.message);
+            }
+        });
+    }
+    </script> 
+    </div> <!-- Content -->
+</div><!-- /Page 1 -->
+
+<!--
+    ****************************
+             page 2
+    ****************************
+-->
+<div data-role="page" id="page2">
+    <div data-role="header" data-theme="a">
+        <h1> </h1>
+<!--        <a data-rel="back" data-icon="back"> Back</a>-->
+        <a data-rel="forward" data-icon="forward" onclick= "localStorage.clear()"> Erase Localstorage</a>
+        <a data-id="persistent" href="#Restauration" data-transition="slide"> liste des marchands</a>
+    </div> <!-- header -->
+    
+<!--    this should not be used-->
+<!--    <div data-role="content"> -->
+     <div role="main" class="ui-content second">
+        <div class="Carte grid">
+            <div>
+                  <label id="Numero"><h5 style="padding-bottom:30px;">#1234</h5></label>
+            </div>
+            <div class="grid2">
+                  <label id="name"><h1></h1></label>
+                  <label id="compagny"><h1></h1></label>            
+            </div>
+        </div>
+    </div> <!-- Content -->
+</div> <!-- /Page2 -->
+ 
+<!--
+    ****************************
+             page 3
+    ****************************
+-->
+<div data-role="page" id="Restauration"> 
+<div data-role="header" style="overflow:hidden;" data-id="persistent" data-position="fixed">
+<h1>Liste des marchands</h1>
+<!--                <a data-rel="back" data-icon="back">Retour</a>  -->
+    <a  href="#page2">Carte</a>
+    <div data-role="navbar"> 
+        <ul>
+            <li><a href="#" class="ui-button-active">Restauration</a></li>
+            <li><a href="#Service" data-transition="slide">Service</a></li>
+            <li><a href="#Immobilier" data-transition="slide">Immobilier</a></li>
+            <li><a href="#Autres" data-transition="slide">Autres</a></li>
+        </ul>
+    </div>
+</div><!-- /header -->
+ 
+<div data-role="collapsibleset" data-theme="a" data-content-theme="a">
+    <div data-role="collapsible">
+        <h3>Restauration</h3> 
+    <p>I'm the collapsible content for section 1</p>
+    </div>
+    <div data-role="collapsible">
+        <h3>Service</h3>
+    <p>I'm the collapsible content for section 2</p>
+    </div>
+    <div data-role="collapsible">
+        <h3>Immobilier</h3>
+    <p>I'm the collapsible content for section 3</p>
+    </div>
+    <div data-role="collapsible">
+        <h3>Autre</h3>
+    <p>I'm the collapsible content for section 3</p>
+    </div>
+</div>
+    
+    
+<!--    *************** Restauration page ***************-->
+<!--    *************************************************-->
+
+        <div>
+            <h1 align="center"> Café Royal enr.</h1>
+            <h1><span style="color: red; font-size: 50px">10%</span> d'escompte sur le menu à la carte.</h1>
+            <p>12015, 2e Avenue
+            Saint-Georges
+            418.228.3952</p>
+        </div>
+        <hr>
+        <div>
+            <a href="https://www.cage.ca/saint-georges-de-beauce" target="_blank"  align="center"><h1>La Cage de Saint-Georges, Brasserie sportive</h1></a>
+            <h2>Achetez une assiette à prix régulier et obtenez la deuxième à 50%.</h2>
+            <img src="css/logoMarchands/LaCageBrasserie.png" >
+            <p>455, 90e Rue
+                Saint-Georges
+                418.227.8181
+            </p>
+            <p>Ne peut être jumelé à aucune autre promotion. Ne s'applique pas sur les déjeuners.</p>
+        </div>    
+    <hr>
+        <div>
+            <div class="MyGrid">
+            <img src="css/logoMarchands/LaTableDuJ.png">
+                <a href="http://www.latabledujunior.com/" target="_blank" align="center"> <h2 align="center">La Table du Junior.</h2> </a>
+            </div>
+            <h1><span style="color: red; font-size: 50px">15%</span> de rabais à l'achat de deux tables d'hôte du soir.</h1>
+        <p>10737, 1e Avenue
+            Saint-Georges
+            418.227.0888
+            </p>
+            <p>Ne peut être jumelé à aucune autre promotion.</p>
+        </div> <hr>     
+       <div>
+            <a href="https://bostonpizza.com/fr/index.html?gclid=Cj0KCQjw2f7bBRDVARIsAAwYBBu1x7hl1tqLKX2hKMA3XxB812GRPPrysNyVrIAll411gXEGUVm9w2UaAifTEALw_wcB&gclsrc=aw.ds" target="_blank"  align="center"><h1>Boston Pizza St-Georges</h1></a>
+            <h2>15% d'escompte sur tout le menu régulier.</h2>
+            <img src="css/logoMarchands/BostonPizza.jpeg" >
+            <p>14917, boul. Lacroix
+                Saint-Georges
+                418.228.8212
+            </p>
+            <p>Nourriture seulement.</p>
+        </div> 
+       <div>
+            <a href="http://www.mobilieraccescible.com/" target="_blank"  align="center"><h1>Mobilier L'Accès-cible</h1></a>
+            <h2>15% d'escompte sur tout achat à prix régulier.</h2>
+            <img src="css/logoMarchands/MobilierCible.png" >
+            <p>8920, boul. Lacroix
+                Saint-Georges
+                418.227.5319
+            </p>
+        </div> 
+       <div>
+            <a href="https://thaizone.ca/" target="_blank"  align="center"><h1>Thaï Zone</h1></a>
+            <h2>10% de rabais sur tout le menu.</h2>
+            <img src="css/logoMarchands/ThaiZone.png" >
+            <p>10125, boul. Lacroix
+                Saint-Georges
+                418.227.9663
+            </p>
+        </div> 
+       <div>
+            <a href="http://www.thermoflowjmroy.ca/" target="_blank"  align="center"><h1>ThermoFlow J.M.Roy</h1></a>
+            <h2>15% d'escompte sur achat de produits Thermoflow.</h2>
+            <img src="css/logoMarchands/Thermoflow.png" >
+            <p>268, 6e Avenue Nord
+                Saint-Georges
+                418.228.2655
+            </p>
+        </div> 
+       <div>
+            <a href="https://www.ubeo.ca/" target="_blank"   align="center"><h1>UBÉO</h1></a>
+            <h2>1 an d'hébergement gratuit à l’achat d’un nouveau site web (valeur de + 150 $)
+ou
+1 mois d’essai gratuit pour la gestion de votre page Facebook entreprise</h2>
+            <img src="css/logoMarchands/UBEO.png" >
+            <p>13865, boul. Lacroix
+                Saint-Georges
+                418.221.7688
+            </p>
+           <p>Détails sur place.</p>
+        </div>
+       <div>
+            <h1 align="center">Lamarque 360 </h1>
+            <h2>Lamarque 360 vous offre une analyse gratuite de votre culture d’entreprise et 10% de rabais sur vos frais d’affichage avec Lamarque Affiche. </h2>
+            <img src="css/logoMarchands/UBEO.png" >
+            <p>65, 2e Rue Sartigan
+                Saint-Georges
+                G5Y 5B8
+                418.230.2171
+            </p>
+           <p>Ne peut être jumelé à aucune autre promotion.</p>
+        </div>
+        <hr>
+        <h1 align="center">Avantages provinciaux</h1>
+        <hr>
+        <p style="color: black !important">Pour bénéficier des rabais ou demandez de l'information, téléphonez à la Chambre de commerce de Saint-Georges au 418.228.7879.</p>
+       <div class="listeMarchands arnold">
+            <h1 align="center">Essence</h1>
+            <h2>Bénéficiez  de 2.5% de rabais sur l'achat de cartes prépayées Ultradollars chez Ultramar.</h2>
+            <p style="color: black !important" >Sur achat de carburant effectué au Canada, obtenez un rabais de 0.03$ du litre avec Shell  <b>(Programme de cartes de crédit Shell TRITON)</b>  et 0.035$ du litre avec Esso  (Cartes de crédit ESSO)
+            </p>
+           <p>Ne peut être jumelé à aucune autre promotion.</p>
+        </div>
+        <div>
+            <h1 align="center">Terminal de transaction</h1>
+            <h2>Taux préférentiels sur les transactions avec cartes de crédit Visa sur terminal de Global Payments et TD Canada Trust</h2>
+        </div>        
+    <div data-role="footer" data-type="footer" data-position="fixed"  data-id="persistent" style="overflow:hidden; text-align: center">
+    <hp style="text-align:center;">www.noterecorder.com</hp>
+    </div> <!-- Content -->
+</div><!-- /Restauration -->
+
+
+    
+<!--    ***************   Service page    ***************-->
+<!--    *************************************************-->
+    <div data-role="page" id="Service">
+         <div data-role="header" style="overflow:hidden;"  data-id="persistent" data-position="fixed">
+            <h1>Liste des marchands</h1>
+            <a href="#page2">Carte</a>
+            <div data-role="navbar"> 
+                <ul>
+                    <li><a href="#Restauration" data-transition="slide">Restauration</a></li>
+                    <li><a href="#" class="ui-button-active">Service</a></li>
+                    <li><a href="#Immobilier" data-transition="slide">Immobilier</a></li>
+                    <li><a href="#Autres" data-transition="slide">Autres</a></li>
+                </ul>
+            </div>
+        </div><!-- /header -->
+        <div>
+            <div class="MyGrid">
+            <img class="logo" src="css/logoMarchands/Imagix_V2.png" >
+            <a href="http://www.conceptionimagix.com/" target="_blank"  align="center"> <h2>Conception IMAGIX</h2></a>
+            </div>
+            <h1><span style="color: red; font-size: 50px">10%</span> de rabais valide au centre de photocopies</h1>
+        <p style="color: black !important" >Pour l’impression numérique, grand format et graphisme. Détails sur place.</p>
+        <p>13865, boul. Lacroix
+        Saint-Georges
+        418.227.7800
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h1 align="center">Centre de location St-Georges</h1>
+            <h2>10% de rabais sur la location d'outillage. </h2>
+            <img src="css/logoMarchands/centredelocationstgeorges-logo.png" >
+            <p>16375, boul. Lacroix
+                Saint-Georges
+                418.227.9563
+            </p>
+            <p>Contactez le détaillant pour plus d'informations.</p>
+        </div> 
+        <hr>
+        <div>
+            <div class="MyGrid">
+            <img src="css/logoMarchands/CardioFeminin.png" >
+                <a href="http://www.cardiofeminin.com/" target="_blank" align="center"> <h2 >Cardio Féminin inc.</h2> </a>
+            </div>
+            <h1><span style="color: red; font-size: 50px">15%</span> de rabais sur entraînement, infrathérapie, bronzage</h1>
+        <p>300, 107e Rue
+            Saint-Georges
+            418.228.4211
+            </p>
+            <p>Rencontre GRATUITE pour plan nutritionnel
+               Ne peux être jumelé à une autre promotion.</p>
+        </div>  
+    <div data-role="footer" data-type="footer" data-position="fixed" data-id="persistent" style="overflow:hidden; text-align: center">
+    <hp style="text-align:center;">www.noterecorder.com</hp>
+    </div> <!-- Content -->
+</div>
+    
+<!--    ***************  Immobilier page  ***************-->
+<!--    *************************************************-->   
+    <div data-role="page" id="Immobilier">
+         <div data-role="header" style="overflow:hidden;" data-id="persistent" data-position="fixed">
+            <h1>Liste des marchands</h1>
+            <a  href="#page2">Carte</a>
+            <div data-role="navbar"> 
+                <ul>
+                    <li><a href="#Restauration" data-transition="slide">Restauration</a></li>
+                    <li><a href="#Service" data-transition="slide">Service</a></li>
+                    <li><a href="#" class="ui-button-active">Immobilier</a></li>
+                    <li><a href="#Autres" data-transition="slide">Autres</a></li>
+                </ul>
+            </div>
+        </div><!-- /header -->
+        <div>
+            <div class="MyGrid">
+            <img src="css/logoMarchands/logo-decoration-arnold.png" >
+                <a href="http://www.decorationarnold.com/" target="_blank" align="center"><h2 align="center"> Décoration Arnold inc.</h2> </a>
+            </div>
+            <h1><span style="color: red; font-size: 50px">10%</span> d'escompte sur tous les produits offerts en magasin.</h1>
+            <p>15820, 6e Avenue
+            Saint-Georges
+            418.228.1224
+            </p>
+        </div>
+        <hr> 
+        <div data-role="footer" data-type="footer" data-position="fixed" data-id="persistent" style="overflow:hidden; text-align: center">
+        <hp style="text-align:center;">www.noterecorder.com</hp>
+        </div> <!-- Content -->
+    </div>
+    
+<!--    ***************    Autres page    ***************-->
+<!--    *************************************************--> 
+    <div data-role="page" id="Autres">
+         <div data-role="header" style="overflow:hidden;" data-id="persistent" data-position="fixed">
+            <h1>Liste des marchands</h1>
+            <a href="#page2">Carte</a>
+            <div data-role="navbar"> 
+                <ul>
+                    <li><a href="#Restauration" data-transition="slide">Restauration</a></li>
+                    <li><a href="#Service" data-transition="slide">Service</a></li>
+                    <li><a href="#Immobilier" data-transition="slide">Immobilier</a></li>
+                    <li><a href="#" class="ui-button-active">Autres</a></li>
+                </ul>
+            </div>
+        </div><!-- /header -->
+        <div data-role="footer" data-type="footer" data-position="fixed" data-id="persistent" style="overflow:hidden; text-align: center">
+        <hp style="text-align:center;">www.noterecorder.com</hp>
+        </div> <!-- Content -->
+    </div>
+
+</body>
+</html>
