@@ -28,20 +28,20 @@ else{
 //    *************************************************************
 //    ************************ Restauration ************************
 //    *************************************************************
-    if(localStorage.boolrestauration  == "false"){
+    /*if(localStorage.boolrestauration  == "false"){
         document.getElementById("restauration").style.display="none";
         }
     else{
         $.getJSON("https://s3-eu-west-1.amazonaws.com/virtualcard/restauration.json",function(data,status){    
         });
-    };
+    };*/
 //    *************************************************************
 
 //    *************************************************************
 //    ************************ Provinciaux ************************
 //    *************************************************************
 //                    à modifier pour les urls
-    if(localStorage.boolprovinciaux  == "false"){
+  /*  if(localStorage.boolprovinciaux  == "false"){
          document.getElementById("provinciaux").style.display="none";
     }
     else{ 
@@ -51,28 +51,28 @@ else{
                 $('#provinciauxDIV').listview('refresh');
 
         });
-    };
+    };*/
 //    *************************************************************
 
     
 //    *************************************************************
 //    ************************ Mobilier ************************
 //    *************************************************************
-    if(localStorage.boolmobilier  == "false"){
+/*    if(localStorage.boolmobilier  == "false"){
         document.getElementById("mobilier").style.display="none";
     }
     else{
               $.get("/www/restauration.html", function(data){
                  $('#mobilierDIV').append(data);
              });
-    };
+    };*/
 //    *************************************************************
 
 //    *************************************************************
 //    ************************ Service ************************
 //    *************************************************************
    
-    if(localStorage.boolservices  == "false"){
+/*    if(localStorage.boolservices  == "false"){
         document.getElementById("service").style.display="none";
     }
     else{
@@ -81,13 +81,13 @@ else{
                 $('#serviceDIV').append(data[0].service);
                 $('#serviceDIV').listview('refresh');
         });
-    };
+    };*/
 //    *************************************************************
 
 //    *************************************************************
 //    ************************ Autre ************************
 //    *************************************************************
-    if(localStorage.boolautre  == "false"){
+ /*   if(localStorage.boolautre  == "false"){
         document.getElementById("autre").style.display="none";
     }
     else{
@@ -96,7 +96,7 @@ else{
                 $('#autre').append(data[0].autre);
                 $('#autre').listview('refresh');
         });
-    }
+    }*/
 //    *************************************************************
 
 //    *************************************************************
