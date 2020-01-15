@@ -41,7 +41,7 @@ $(function(){
             nameID               = document.getElementById("name");
             nameID.innerHTML     = localStorage.name;
             organisationID           = document.getElementById("organisation");
-            organisationID.innerHTML = localStorage.compagny; 
+            organisationID.innerHTML = localStorage.organisation; 
             numeroID             = document.getElementById("Numero");
             numeroID.innerHTML   = localStorage.memberNumber;
                     
