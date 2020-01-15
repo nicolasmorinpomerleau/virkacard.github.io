@@ -51,7 +51,7 @@ p{
 
 #Numero{
   font-size: 3vw;
-  position: relative;
+  position: fixed;
   float: left;
   font-family: "Century Gothic",sans-serif;
   color: #039be5;;
