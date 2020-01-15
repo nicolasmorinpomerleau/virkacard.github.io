@@ -24,81 +24,6 @@ else{
          });
 };
 
-
-//    *************************************************************
-//    ************************ Restauration ************************
-//    *************************************************************
-    /*if(localStorage.boolrestauration  == "false"){
-        document.getElementById("restauration").style.display="none";
-        }
-    else{
-        $.getJSON("https://s3-eu-west-1.amazonaws.com/virtualcard/restauration.json",function(data,status){    
-        });
-    };*/
-//    *************************************************************
-
-//    *************************************************************
-//    ************************ Provinciaux ************************
-//    *************************************************************
-//                    à modifier pour les urls
-  /*  if(localStorage.boolprovinciaux  == "false"){
-         document.getElementById("provinciaux").style.display="none";
-    }
-    else{ 
-        $.getJSON(localStorage.provinciaux,function(data,status){
-                $('#provinciauxDIV').empty();
-                $('#provinciauxDIV').append(data[0].provinciaux);
-                $('#provinciauxDIV').listview('refresh');
-
-        });
-    };*/
-//    *************************************************************
-
-    
-//    *************************************************************
-//    ************************ Mobilier ************************
-//    *************************************************************
-/*    if(localStorage.boolmobilier  == "false"){
-        document.getElementById("mobilier").style.display="none";
-    }
-    else{
-              $.get("/www/restauration.html", function(data){
-                 $('#mobilierDIV').append(data);
-             });
-    };*/
-//    *************************************************************
-
-//    *************************************************************
-//    ************************ Service ************************
-//    *************************************************************
-   
-/*    if(localStorage.boolservices  == "false"){
-        document.getElementById("service").style.display="none";
-    }
-    else{
-        $.getJSON(localStorage.services,function(data,status){
-                $('#serviceDIV').empty();
-                $('#serviceDIV').append(data[0].service);
-                $('#serviceDIV').listview('refresh');
-        });
-    };*/
-//    *************************************************************
-
-//    *************************************************************
-//    ************************ Autre ************************
-//    *************************************************************
- /*   if(localStorage.boolautre  == "false"){
-        document.getElementById("autre").style.display="none";
-    }
-    else{
-        $.getJSON(localStorage.autre,function(data,status){
-                $('#autre').empty();
-                $('#autre').append(data[0].autre);
-                $('#autre').listview('refresh');
-        });
-    }*/
-//    *************************************************************
-
 //    *************************************************************
 //    ************************ Offres Spéciale ********************
 //    *************************************************************
@@ -115,38 +40,11 @@ $(function(){
         if(localStorage.Email!=undefined && localStorage.code != undefined){
             nameID               = document.getElementById("name");
             nameID.innerHTML     = localStorage.name;
-            compagnyID           = document.getElementById("compagny");
-           // compagnyID.innerHTML = localStorage.compagny; 
+            organisationID           = document.getElementById("organisation");
+            organisationID.innerHTML = localStorage.compagny; 
             numeroID             = document.getElementById("Numero");
             numeroID.innerHTML   = localStorage.memberNumber;
-            organisationID       = document.getElementById("organisation");
-            organisationID.innerHTML = localStorage.organisation;
-            
-            //        setup display in html
-//        localStorage.booloffers = true;
-//            localStorage.boolmarchandlist = "true";
-//            localStorage.boolevents = "false";
-//            
-//            localStorage.boolrestauration  = "true";
-//            localStorage.boolservices = "false";
-//            localStorage.boolmobilier = "true";
-//            localStorage.boolprovinciaux = "false";
-//            localStorage.booloffers = "false";
-            
-//        if(localStorage.booloffers == "true"){
-//            OffresSpeciale = 
-//                document.getElementById("OffresSpeciale").style.display="none";
-//            OffresSpeciale.className += 'Hide';
-//        };
-        
-//        if(localStorage.boolevents == "false"){
-//             document.getElementById("events").style.display="none";
-//        };
-//        
-//        if(localStorage.boolmarchandlist == "false"){
-//             document.getElementById("ListeDesMarchands").style.display="none";
-//        };
-        
+                    
             if(localStorage.boolmarchandlist == "false"){
                 document.getElementById('ListeDesMarchands').style.display="none";
             }
@@ -190,17 +88,13 @@ function Validate(){
     if(res.answer == 'userFind'){
     nameID               = document.getElementById("name");
     nameID.innerHTML     = res.info.name;
-    compagnyID           = document.getElementById("compagny");
-    // compagnyID.innerHTML = res.info.company;
+    organisationID           = document.getElementById("organisation");
+    organisationID.innerHTML = res.info.company;
     numeroID           = document.getElementById("Numero");
-    numeroID.innerHTML = "#"+res.info.memberNumber;
-    organisationID     = document.getElementById("organisation");
-    organisationID.innerHTML = res.info.organisation;
-           
+    numeroID.innerHTML = "#"+res.info.memberNumber;        
         
     localStorage.name          = res.info.name;
-    localStorage.compagny      = res.info.company;
-    localStorage.organisation  = res.info.organisation;
+    localStorage.organisation   = res.info.company;
     localStorage.memberNumber  = "#"+res.info.memberNumber;
     localStorage.codeBar       = "#"+res.info.memberNumber;
         //        url WebView
