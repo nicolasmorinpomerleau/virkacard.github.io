@@ -123,8 +123,8 @@ function getChannel(channel) {
     .catch(err => alert('No Channel By That Name'));
 }
 
-getScript(){
-    
+function getScript(){
+
         $.ajax({
             url: "https://www.googleapis.com/youtube/v3/captions/5HeZaYtfDf8?key=AIzaSyBKP-6WhtNCgRxc50R5682vgkTcai_EXX8",
             type: 'GET',
@@ -134,7 +134,7 @@ getScript(){
                 alert(res);
             }
         });
-}
+};
 
 // Add commas to number
 function numberWithCommas(x) {
