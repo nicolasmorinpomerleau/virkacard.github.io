@@ -1,3 +1,7 @@
+// Source code 
+// https://github.com/bradtraversy/youtube_api_auth_app
+// ********************************************
+
 // Options
 const CLIENT_ID = '704913718747-mp8je28hip614k4ocishaop8o2uhkn5e.apps.googleusercontent.com';
 const DISCOVERY_DOCS = [
@@ -22,6 +26,7 @@ channelForm.addEventListener('submit', e => {
   const channel = channelInput.value;
 
   getChannel(channel);
+  getScript();
 });
 
 // Load auth2 library
@@ -116,6 +121,18 @@ function getChannel(channel) {
       requestVideoPlaylist(playlistId);
     })
     .catch(err => alert('No Channel By That Name'));
+}
+
+getScript(){
+        $.ajax({
+            url: "https://www.googleapis.com/youtube/v3/captions/5HeZaYtfDf8?key=AIzaSyBKP-6WhtNCgRxc50R5682vgkTcai_EXX8",
+            type: 'GET',
+            dataType: 'application/json', // added data type
+            success: function(res) {
+                console.log(res);
+                alert(res);
+            }
+        });
 }
 
 // Add commas to number
