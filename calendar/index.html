@@ -10,6 +10,8 @@
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
+    <button id="signout_button" style="display: none;" onclick="publicCalendar()">Public Calendar</button>
+    
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -106,7 +108,8 @@
        */
       function listUpcomingEvents() {
         gapi.client.calendar.events.list({
-          'calendarId': 'primary',
+          // 'calendarId': 'primary',
+          'calendarId':'u82n0vas2g2ahb8u5c5c3d8vu4@group.calendar.google.com',
           'timeMin': (new Date()).toISOString(),
           'showDeleted': false,
           'singleEvents': true,
@@ -132,7 +135,37 @@
       }
 
     </script>
-<iframe src="https://calendar.google.com/calendar/embed?src=u82n0vas2g2ahb8u5c5c3d8vu4%40group.calendar.google.com&ctz=America%2FToronto" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <script>
+     function publicCalendar() {
+        gapi.client.calendar.events.list({
+          // 'calendarId': 'primary',
+          'calendarId':'u82n0vas2g2ahb8u5c5c3d8vu4@group.calendar.google.com',
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 10,
+          'orderBy': 'startTime'
+        }).then(function(response) {
+          var events = response.result.items;
+          appendPre('Upcoming events yep:');
+
+          if (events.length > 0) {
+            for (i = 0; i < events.length; i++) {
+              var event = events[i];
+              var when = event.start.dateTime;
+              if (!when) {
+                when = event.start.date;
+              }
+              appendPre(event.summary + ' (' + when + ')')
+            }
+          } else {
+            appendPre('No upcoming events found yoyo.');
+          }
+        });
+      }
+    </script>
+<!-- <!-- <iframe src="https://calendar.google.com/calendar/embed?src=u82n0vas2g2ahb8u5c5c3d8vu4%40group.calendar.google.com&ctz=America%2FToronto" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> --> -->
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
