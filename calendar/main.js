@@ -1,8 +1,13 @@
+var someDate = new Date();
+var numberOfDaysToAdd = 10;
+someDate.setDate(someDate.getDate() + numberOfDaysToAdd); 
+
 function publicCalendar() {
         gapi.client.calendar.events.list({
           // 'calendarId': 'primary',
           'calendarId':'u82n0vas2g2ahb8u5c5c3d8vu4@group.calendar.google.com',
           'timeMin': (new Date()).toISOString(),
+          "timeMax": someDate.toISOString(),
           'showDeleted': false,
           'singleEvents': true,
           'maxResults': 10,
