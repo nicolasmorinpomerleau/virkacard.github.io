@@ -49,11 +49,11 @@ function insert() {
         'location': '800 Howard St., San Francisco, CA 94103',
         'description': 'A chance to hear more about Google\'s developer products.',
         'start': {
-          'dateTime': '2020-02-28T09:00:00-05:00'
+          'dateTime': '2020-01-28T09:00:00-05:00'
         //   'timeZone': 'America/Los_Angeles'
         },
         'end': {
-          'dateTime': '2020-01-28T17:00:00-05:00'
+          'dateTime': '2020-01-28T10:00:00-05:00'
         //   'timeZone': 'America/Los_Angeles'
         },
         // 'recurrence': [
