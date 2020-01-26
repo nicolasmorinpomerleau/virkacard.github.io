@@ -11,8 +11,9 @@
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
-    <button id="public_button"  onclick="publicCalendar()">Public Calendar</button>
-    
+    <button id="display_button"  onclick="publicCalendar()">Display</button>
+    <button id="insert_button"  onclick="insert()"> Insert</button>
+
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -26,7 +27,8 @@
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+      // var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/calendar";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
