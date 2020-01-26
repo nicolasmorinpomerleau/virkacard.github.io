@@ -56,9 +56,9 @@ function insert() {
           'dateTime': '2020-01-28T17:00:00-05:00'
         //   'timeZone': 'America/Los_Angeles'
         },
-        'recurrence': [
-          'RRULE:FREQ=DAILY;COUNT=2'
-        ],
+        // 'recurrence': [
+        //   'RRULE:FREQ=DAILY;COUNT=2'
+        // ],
         'attendees': [
           {'email': 'nicolasmorinpomerleau@gmail.com'}
         ],
