@@ -10,7 +10,7 @@ function publicCalendar() {
         }).then(function(response) {
           var events = response.result.items;
           appendPre('Upcoming events yep:');
-
+            var time = (new Date()).toISOString();
           if (events.length > 0) {
             for (i = 0; i < events.length; i++) {
               var event = events[i];
