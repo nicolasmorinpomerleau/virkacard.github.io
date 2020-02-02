@@ -64,6 +64,14 @@ p{
   float: left;
   font-family: "Century Gothic",sans-serif
 }
+#messageForm{
+ height: 170px!important;
+}
+
+#envoyer{
+ width: 30%;
+ margin-left: 35%;
+}
 
 #compagny{
   text-align: left;
