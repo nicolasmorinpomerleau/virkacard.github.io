@@ -183,8 +183,8 @@
     </div>
     <!-- *********  Form ********* -->
         <form style="width: 100%" class="gform" method="POST" data-email="contact@amcreatives.ca"
-        action="https://script.google.com/macros/s/AKfycbwyOa3qm6TR7M6CH9-nNP1aX0taYSwAb4EMXC-lhhybzxLT-eM/exec">
-        <!--  https://script.google.com/macros/s/AKfycbxFfwpV4GoFKCON63wTCI1dZcOrEgmFwK6d0tCA6N_wEcnZ45iy/exec    -->
+        action="https://script.google.com/macros/s/AKfycbxFfwpV4GoFKCON63wTCI1dZcOrEgmFwK6d0tCA6N_wEcnZ45iy/exec">
+        <!-- https://script.google.com/macros/s/AKfycbwyOa3qm6TR7M6CH9-nNP1aX0taYSwAb4EMXC-lhhybzxLT-eM/exec  -->
         <div  class="form-elements">
             <fieldset>
             <label for="nameForm"></label>
@@ -208,14 +208,30 @@
             placeholder="Votre commentaire nous est important!" ></textarea>
             </fieldset>
             <br>
-            <button id="envoyer" class="button-success pure-button button-xlarge" >
+
+            <!-- <button id="envoyer" class="button-success pure-button button-xlarge" >
             <i ></i>&nbsp;Envoyer</button>
-            <!-- class="fa fa-paper-plane" -->
         </div>
         <div class="thankyou_message" style="display:none;">
             <h2> Votre commentaire nous a été envoyée avec succès.
             Merci beaucoup. <em>Merci!</em></h2>
-        </div>
+        </div> -->
+
+        <script>
+            function GetName() {
+               document.getElementById("nameBack").textContent = document.getElementById("nameForm").value;
+                }
+          </script>
+              
+            <button class="button-success pure-button button-xlarge" onclick="GetName()">
+              <i class="fa fa-paper-plane"></i>&nbsp;Envoyer</button>
+          </div>
+          <!-- Customise the Thankyou Message People See when they submit the form: -->
+          <div class="thankyou_message" style="display:none;">
+            <h2><label id="nameBack"></label> Votre demande nous a été envoyée avec succès.
+              Nous vous contacterons dans les meilleurs délais. <em>Merci!</em></h2>
+          </div>
+
         </form>
     <div>
     <!--    ***************       Footer      ***************-->
