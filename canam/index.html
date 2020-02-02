@@ -122,7 +122,7 @@
 <div data-role="header" class="header" style="overflow:hidden; background-color: #333; color: white;" data-id="persistent" data-position="fixed">
     <h1 style="font-weight: 500; font-size: 1.1em;">Liste des marchands</h1>
     <a data-id="persistent" href="#page2" class="bkg-Orange" data-transition="slide"> Carte</a>
-    <a data-id="persistent" id="OffresSpeciale" class="bkg-Orange" onclick="offres()"> Offres spéciales</a>
+    <a data-id="persistent" id="OffresSpeciale" class="bkg-Orange" href="#page5"> Offres spéciales</a>
 </div><!-- /header -->
  
 <div data-role="collapsibleset" data-theme="b" data-content-theme="e">
@@ -182,13 +182,12 @@
 <div data-role="page" id="comment"> 
     <div data-role="header" class="header" style="overflow:hidden; background-color: #333; color: white;" data-id="persistent" data-position="fixed">
     <h1 class="bkg-Orange" style=" font-weight:normal !important;font-size: 1.1em;"> Vos commentaires</h1>
-    <a data-id="persistent" id="OffresSpeciale" class="bkg-Orange" onclick="offres()"> Offres spéciales</a>
+    <a data-id="persistent" id="OffresSpeciale" class="bkg-Orange" href="#page5"> Offres spéciales</a>
     <a data-id="persistent" href="#page2" class="bkg-Orange" data-transition="slide" > Carte</a>
     </div>
     <!-- *********  Form ********* -->
         <form style="width: 100%" class="gform" method="POST" data-email="contact@amcreatives.ca"
         action="https://script.google.com/macros/s/AKfycbxFfwpV4GoFKCON63wTCI1dZcOrEgmFwK6d0tCA6N_wEcnZ45iy/exec">
-        <!-- https://script.google.com/macros/s/AKfycbwyOa3qm6TR7M6CH9-nNP1aX0taYSwAb4EMXC-lhhybzxLT-eM/exec  -->
         <div  class="form-elements">
             <fieldset>
             <label for="nameForm"></label>
@@ -212,14 +211,6 @@
             placeholder="Votre commentaire nous est important!" ></textarea>
             </fieldset>
             <br>
-
-            <!-- <button id="envoyer" class="button-success pure-button button-xlarge" >
-            <i ></i>&nbsp;Envoyer</button>
-        </div>
-        <div class="thankyou_message" style="display:none;">
-            <h2> Votre commentaire nous a été envoyée avec succès.
-            Merci beaucoup. <em>Merci!</em></h2>
-        </div> -->
 
         <script>
             function GetName() {
@@ -253,28 +244,13 @@
 -->
 <!--    Page des offres spéciales des marchands-->
 <div data-role="page" id="page5"> 
-    <div data-role="header" style="overflow:hidden;background-color: #333; color: white;" data-id="persistent" data-position="fixed">
+    <div data-role="header" class="header" style="overflow:hidden; background-color: #333; color: white;" data-id="persistent" data-position="fixed">
         <h1 class="bkg-Orange" style=" font-weight:normal !important;font-size: 1.1em;"> Offres spéciales</h1>
         <a data-id="persistent" href="#page2" class="bkg-Orange" data-transition="slide" > Carte</a>
         <a data-id="persistent" href="#page3" class="bkg-Orange" data-transition="slide"> Liste des marchands</a>
     </div>
+    <h1 style="text-align: center; margin-top: 20%; color: #29435f"> Il n'y a pas d'offre pour le moment </h1>
 <div>
-    
-        <script type="text/javascript" charset="utf-8">             
-        function offres() {
-            var url = "http://amcreatives.ca/VircaOffres/";
-            var target = "_self";
-            var options = "location=yes,clearcache=yes,footer=yes,closebuttoncaption='retour'";
-            
-            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
-            inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
-            
-            function loadStartCallBack() {
-                $('#status-message').text("En chargement ...");
-            }
-
-            } //onDeviceReady
-        </script>
    
 <!--    ***************       Footer      ***************-->
 <!--    *************************************************--> 
