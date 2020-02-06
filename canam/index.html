@@ -2,53 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** "> -->
 
     <title>Carte avantage virtuelle</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css"/>
     <link rel="stylesheet" href="css/color.css" />
-    <!-- <link rel="stylesheet" href="css/google.css" > 
-    <link rel="stylesheet" href="css/free-v4-shims.min.css" > -->
-
-    <!-- <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-add-css="false"></script>
-    <link href="https://use.fontawesome.com/releases/v5.12.0/css/svg-with-js.css" rel="stylesheet" /> -->
-  
-    <!-- <script src="js/b72fd8903d.js"></script>
-    <link rel="stylesheet" href="css/font-awesome.min.css"> -->
-    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
 
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
     <link rel="manifest" href="/www/manifest.json">
     
-<!--            <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>-->
-<!--    Not to include for the current version 27 dec 2018-->
-<!--    <script type="text/javascript" src="cordova.js"></script>-->
-    
-<!--    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>-->
-<!--
-    <script>
-         var OneSignal = window.OneSignal || [];
-          OneSignal.push(function() {
-            OneSignal.init({
-              appId: "8388c0ef-1492-4892-9296-17091773564c",
-            });
-          });
-   </script>
--->
-<!-- <script src="js/OneSignalSDK-2.js"></script>
-<script src="js/OneSignal.js"></script> -->
 <script src="js/engine.js"></script>
 <script src="js/JsBarcode.all.min.js"></script></head>
 <body>
 <!--
     ****************************
-             pageouverture
+             page ouverture
     ****************************
 -->
 <div data-role="page" id="pageouverture">
@@ -121,7 +94,7 @@
              </div>
             <!-- 5 -->
             <div style="text-align: right;color: #039be5;">
-            Date d'expiration: Septembre 2020
+            Date d'expiration: Décembre 2020
             </div>
         </div>
     </div> <!-- Content -->
@@ -141,19 +114,15 @@
 <div data-role="collapsibleset" data-theme="b" data-content-theme="e">
 <!-- **************************************************** -->
 <!-- **************************************************** -->
-<!-- <i class="fas fa-utensils"></i>
- 
-<i class="fa fa-futboll-0"></i>    -->
+
 <p style="font-family:Google Sans, sans-serif!important; color: #0073b1;font-size: x-large;"> Toujours présenter votre carte avant de placer votre commande</p>
   <div class="Collabs" data-role="collapsibleset" data-theme="b" data-content-theme="e" >
   <!--    *************** Restauration page ***************-->
   <!--    *************************************************-->
-  <!--    <div id="status-message" data-role="collapsible">-->
 
     <!-- **************************** -->
     <!-- **************************** -->
     <!-- à mettre pour la version de prod  -->
-    <!-- <div id="merchantPage"></div> -->
     <!-- **************************** -->
 
     <div style="margin-bottom:7px;"> 
@@ -167,7 +136,6 @@
                               style="color:#bfa050;" 
                               align="center;" 
                               style="color: #bfa050;"></a>
-<!-- See how to remove the underlining -->
                               <h2>
                                  La Cage Aux Sports.
                               </h2>
@@ -484,15 +452,11 @@
                             <i class="fas fa-utensils"></i>
                             <i class="fa fa-futboll-0"></i> 
                             <h3>
-                              <!-- <span  style="color: #ffffff; background-color: #C45500!important; font-size: 4vw;">10%</span> -->
                               <span id="oct">10%</span>
                               <span id="shape"></span> <br>
                               vous sera accordé sur le prix régulier, excluant les périodes suivantes : 
                               Noël, St-Valentin, Pâques, Fête des mères, Fête des pères.
                             </h3>
-                            <!-- <div>
-
-                            </div> -->
                             <h4>
                             413, route 204 Nord, Saint-Gédéon<br>
                               <a href="tel:418 582-3430" style="color:#0066c0!important;"> 418 582-3430</a>
@@ -561,7 +525,6 @@
             <li> Les rabais ne pourront pas s'appliquer lors d'un paiement par carte de crédit, lors d'un paiement différé ou à crédit></li>
     </ul>
 </ul>
-                              <!-- <span style="color: #0066c0; font-size: 4vw;">15%</span>de rabais du lundi au vendredi sur les menus midi. -->
                             </h3>
                             <h4>
                             326, Route 204 Sud, Saint-Martin<br>
@@ -2131,26 +2094,10 @@
     </div>
 <div>
     
-        <script type="text/javascript" charset="utf-8">             
-        function offres() {
-            var url = "http://amcreatives.ca/VircaOffres/";
-            var target = "_self";
-            var options = "location=yes,clearcache=yes,footer=yes,closebuttoncaption='retour'";
-            
-            inAppBrowserRef = cordova.InAppBrowser.open(url, target, options);
-            inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
-            
-            function loadStartCallBack() {
-                $('#status-message').text("En chargement ...");
-            }
-
-            } //onDeviceReady
-        </script>
    
 <!--    ***************       Footer      ***************-->
 <!--    *************************************************--> 
     <div id="footer_2" data-role="footer" data-type="footer" data-position="fixed"  style="overflow:hidden; text-align: center;">
-<!--        data-id="persistent" to persist in the slide transition-->
     <hp style="text-align:center;"><a  style="color: white; font-weight:normal !important;text-decoration: none !important;" href="http://www.amcreatives.ca" target="_blank">amcreatives.ca</a></hp>
     </div> <!-- Footer -->
 </div>
